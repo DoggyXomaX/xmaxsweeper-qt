@@ -5,11 +5,13 @@ CONFIG += c++11
 
 SOURCES += \
     graphicscontainer.cpp \
+    graphicstemplate.cpp \
     main.cpp \
     xmaxwindow.cpp
 
 HEADERS += \
     graphicscontainer.h \
+    graphicstemplate.h \
     xmaxwindow.h
 
 RESOURCES += \
