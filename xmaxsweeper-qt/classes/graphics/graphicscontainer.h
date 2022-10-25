@@ -12,7 +12,6 @@ class GraphicsContainer {
     GraphicsContainer(const GraphicsTemplate *graphicsTemplate, QWidget *parent);
   private:
     QLabel *m_label;
-    QPixmap *m_pixmap;
 };
 
 #endif // __GRAPHICSCONTAINER_H__
