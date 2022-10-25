@@ -1,4 +1,4 @@
-#include "xmaxwindow.h"
+#include "headers/xmaxwindow.h"
 
 XmaxWindow::XmaxWindow(QWidget *parent) : QWidget{parent} {
   // Temporary 1.0f

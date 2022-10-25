@@ -4,14 +4,14 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 CONFIG += c++11
 
 SOURCES += \
-    graphicscontainer.cpp \
-    main.cpp \
-    xmaxwindow.cpp
+    sources/graphicscontainer.cpp \
+    sources/main.cpp \
+    sources/xmaxwindow.cpp
 
 HEADERS += \
-    graphicscontainer.h \
-    graphicstemplate.h \
-    xmaxwindow.h
+    headers/graphicscontainer.h \
+    headers/graphicstemplate.h \
+    headers/xmaxwindow.h
 
 RESOURCES += \
-  Graphics.qrc
+  assets/Graphics.qrc
