@@ -1,11 +1,16 @@
-#ifndef GRAPHICSCONTAINER_H
-#define GRAPHICSCONTAINER_H
+#ifndef __GRAPHICSCONTAINER_H__
+#define __GRAPHICSCONTAINER_H__
 
+#include <QLabel>
+#include <QPixmap>
 
-class GraphicsContainer
-{
-public:
-  GraphicsContainer();
+class GraphicsContainer {
+  public:
+    GraphicsContainer();
+    ~GraphicsContainer();
+  private:
+    QLabel m_label;
+    QPixmap m_Pixmap;
 };
 
-#endif // GRAPHICSCONTAINER_H
+#endif // __GRAPHICSCONTAINER_H__
