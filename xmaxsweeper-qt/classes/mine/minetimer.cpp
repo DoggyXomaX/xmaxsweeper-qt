@@ -1,6 +1,5 @@
 #include "minetimer.h"
 
-MineTimer::MineTimer()
-{
+MineTimer::MineTimer() {
 
 }

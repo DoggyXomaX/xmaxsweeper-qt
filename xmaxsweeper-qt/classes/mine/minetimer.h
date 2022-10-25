@@ -1,11 +1,10 @@
-#ifndef MINETIMER_H
-#define MINETIMER_H
+#ifndef __MINETIMER_H__
+#define __MINETIMER_H__
 
 
-class MineTimer
-{
-public:
-  MineTimer();
+class MineTimer {
+  public:
+    MineTimer();
 };
 
-#endif // MINETIMER_H
+#endif // __MINETIMER_H__
