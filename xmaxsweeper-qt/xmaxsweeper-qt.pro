@@ -11,4 +11,4 @@ HEADERS += \
     xmaxwindow.h
 
 RESOURCES += \
-  Images.qrc
+  Graphics.qrc

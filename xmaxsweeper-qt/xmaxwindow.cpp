@@ -1,10 +1,11 @@
 #include "xmaxwindow.h"
 
 XmaxWindow::XmaxWindow(QWidget *parent) : QWidget{parent} {
-  setGeometry(300, 300, 300, 200);
-  setStyleSheet("background-color: " BACKGROUND_COLOR ";");
+  QResource::registerResource("Graphics.qrc");
 
-  QResource::registerResource("Images.qrc");
+  // Copy Figma design
+  setFixedSize(320, 248);
+  setStyleSheet("background-color: " BACKGROUND_COLOR ";");
 
   QPixmap *pic = new QPixmap(":/img/basic-cell.png");
 
