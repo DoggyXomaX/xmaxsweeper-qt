@@ -1,5 +1,24 @@
 <RCC>
     <qresource prefix="/">
-        <file>img/basic-cell.png</file>
+        <file>img/mouse/idle.png</file>
+        <file>img/border/bottom.png</file>
+        <file>img/border/left.png</file>
+        <file>img/border/left-bottom.png</file>
+        <file>img/border/left-top.png</file>
+        <file>img/border/right.png</file>
+        <file>img/border/right-bottom.png</file>
+        <file>img/border/right-top.png</file>
+        <file>img/border/top.png</file>
+        <file>img/number/0.png</file>
+        <file>img/number/1.png</file>
+        <file>img/number/2.png</file>
+        <file>img/number/3.png</file>
+        <file>img/number/4.png</file>
+        <file>img/number/5.png</file>
+        <file>img/number/6.png</file>
+        <file>img/number/7.png</file>
+        <file>img/number/8.png</file>
+        <file>img/number/9.png</file>
+        <file>img/cell/masked.png</file>
     </qresource>
 </RCC>

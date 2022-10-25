@@ -8,5 +8,8 @@ GraphicsContainer::GraphicsContainer(const GraphicsTemplate *graphicsTemplate, Q
   m_label->setParent(parent);
   m_label->setPixmap(*m_pixmap);
   m_label->setScaledContents(true);
+
+  if (graphicsTemplate->transparent)
+    m_label->setStyleSheet("background-color: rgba(0, 0, 0, 0);");
   m_label->show();
 }
