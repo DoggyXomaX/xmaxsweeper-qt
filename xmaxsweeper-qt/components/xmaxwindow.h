@@ -12,6 +12,7 @@ using std::vector;
 
 #include "classes/graphics/graphicscontainer.h"
 #include "classes/graphics/graphicstemplate.h"
+#include "classes/mine/mineborders.h"
 
 #define BACKGROUND_COLOR "#D9B697"
 
@@ -25,12 +26,7 @@ using std::vector;
   { ":/img/border/bottom.png",       (x) + 2,       (y) + 2 + (h), (w), 2,   false }, \
   { ":/img/border/right-bottom.png", (x) + 2 + (w), (y) + 2 + (h), 2,   2,   false },
 
-const GraphicsTemplate_t GRAPHICS_TEMPLATE[] = {
-  CREATE_BORDER(12, 1, 15, 10) // Left Timer border
-  CREATE_BORDER(33, 1, 10, 10) // Center border
-  CREATE_BORDER(49, 1, 15, 10) // Right Timer border
-  CREATE_BORDER(18, 17, 40, 40) // Bomb Field
-
+const GraphicsTemplate_t DebugGraphicsTemplate[] = {
   // Numbers
   { ":/img/number/2.png", 14, 3, 5, 10, false },
   { ":/img/number/2.png", 19, 3, 5, 10, false },
@@ -116,7 +112,7 @@ const GraphicsTemplate_t GRAPHICS_TEMPLATE[] = {
   { ":/img/cell/masked.png", 55, 54, 5, 5, false },
 };
 
-const uint32_t GRAPHICS_TEMPLATE_LENGTH = sizeof(GRAPHICS_TEMPLATE) / sizeof(GRAPHICS_TEMPLATE[0]);
+const uint32_t DebugGraphicsTemplateLength = sizeof(DebugGraphicsTemplate) / sizeof(DebugGraphicsTemplate[0]);
 
 class XmaxWindow : public QWidget {
   Q_OBJECT
