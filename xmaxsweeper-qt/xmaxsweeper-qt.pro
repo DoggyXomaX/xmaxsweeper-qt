@@ -5,6 +5,7 @@ CONFIG += c++11
 
 SOURCES += \
     main.cpp \
+    classes/mine/mineborders.cpp \
     classes/graphics/graphicscontainer.cpp \
     classes/mine/minetimer.cpp \
     components/xmaxwindow.cpp
@@ -12,6 +13,7 @@ SOURCES += \
 HEADERS += \
     classes/graphics/graphicscontainer.h \
     classes/graphics/graphicstemplate.h \
+    classes/mine/mineborders.h \
     classes/mine/minetimer.h \
     components/xmaxwindow.h
 
