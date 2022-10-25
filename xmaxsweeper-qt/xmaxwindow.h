@@ -6,6 +6,11 @@
 #include <QResource>
 #include <QWidget>
 
+#include <vector>
+using std::vector;
+
+#include "graphicscontainer.h"
+
 #define BACKGROUND_COLOR "#D9B697"
 
 class XmaxWindow : public QWidget {
@@ -15,6 +20,7 @@ class XmaxWindow : public QWidget {
     float getScale(void);
   private:
     float m_aspectScale;
+    vector<GraphicsContainer> m_graphics;
 };
 
 #endif // __QT_XMAXWINDOW_H__
