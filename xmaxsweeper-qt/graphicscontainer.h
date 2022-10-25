@@ -6,11 +6,11 @@
 
 class GraphicsContainer {
   public:
-    GraphicsContainer();
+    GraphicsContainer(QString path);
     ~GraphicsContainer();
   private:
     QLabel m_label;
-    QPixmap m_Pixmap;
+    QPixmap m_pixmap;
 };
 
 #endif // __GRAPHICSCONTAINER_H__
