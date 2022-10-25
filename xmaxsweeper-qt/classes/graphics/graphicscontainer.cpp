@@ -1,4 +1,4 @@
-#include "headers/graphicscontainer.h"
+#include "graphicscontainer.h"
 
 GraphicsContainer::GraphicsContainer(const GraphicsTemplate *graphicsTemplate, QWidget *parent) {
   m_pixmap = new QPixmap(graphicsTemplate->path);

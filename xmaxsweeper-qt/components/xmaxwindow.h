@@ -10,8 +10,8 @@
 #include <vector>
 using std::vector;
 
-#include "graphicscontainer.h"
-#include "graphicstemplate.h"
+#include "classes/graphics/graphicscontainer.h"
+#include "classes/graphics/graphicstemplate.h"
 
 #define BACKGROUND_COLOR "#D9B697"
 

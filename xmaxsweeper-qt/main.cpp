@@ -2,7 +2,7 @@
 #include <QPushButton>
 #include <QImage>
 
-#include "headers/xmaxwindow.h"
+#include "components/xmaxwindow.h"
 
 int main(int argc, char *argv[])
 {
