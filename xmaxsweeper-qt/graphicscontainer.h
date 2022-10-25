@@ -3,10 +3,11 @@
 
 #include <QLabel>
 #include <QPixmap>
+#include <QWidget>
 
 class GraphicsContainer {
   public:
-    GraphicsContainer(QString path);
+    GraphicsContainer(QString path, QWidget *parent);
     ~GraphicsContainer();
   private:
     QLabel m_label;
