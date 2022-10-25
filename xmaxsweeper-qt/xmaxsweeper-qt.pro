@@ -5,7 +5,6 @@ CONFIG += c++11
 
 SOURCES += \
     graphicscontainer.cpp \
-    graphicstemplate.cpp \
     main.cpp \
     xmaxwindow.cpp
 

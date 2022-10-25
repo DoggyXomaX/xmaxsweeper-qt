@@ -1,11 +1,11 @@
 #ifndef __GRAPHICSTEMPLATE_H__
 #define __GRAPHICSTEMPLATE_H__
 
+#include <cinttypes>
 
-class GraphicsTemplate
-{
-public:
-  GraphicsTemplate();
-};
+typedef struct GraphicsTemplate {
+  const char *path;
+  uint32_t x, y, width, height;
+} GraphicsTemplate_t;
 
 #endif // __GRAPHICSTEMPLATE_H__

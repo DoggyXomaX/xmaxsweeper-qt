@@ -7,13 +7,6 @@ XmaxWindow::XmaxWindow(QWidget *parent) : QWidget{parent} {
   setFixedSize(320, 248);
   setStyleSheet("background-color: " BACKGROUND_COLOR ";");
 
-  QPixmap *pic = new QPixmap(":/img/basic-cell.png");
-
-  QLabel *label = new QLabel("Meow");
-  label->setParent(this);
-  label->setGeometry(10, 10, 50, 50);
-  label->setPixmap(*pic);
-  label->setScaledContents(true);
-
-  label->show();
+  GraphicsContainer testContainer(GRAPHICS_TEMPLATE, this);
+  m_graphics.push_back(testContainer);
 }

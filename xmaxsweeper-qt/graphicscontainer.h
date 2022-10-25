@@ -5,13 +5,14 @@
 #include <QPixmap>
 #include <QWidget>
 
+#include "graphicstemplate.h"
+
 class GraphicsContainer {
   public:
-    GraphicsContainer(QString path, QWidget *parent);
-    ~GraphicsContainer();
+    GraphicsContainer(const GraphicsTemplate *graphicsTemplate, QWidget *parent);
   private:
-    QLabel m_label;
-    QPixmap m_pixmap;
+    QLabel *m_label;
+    QPixmap *m_pixmap;
 };
 
 #endif // __GRAPHICSCONTAINER_H__
