@@ -28,10 +28,8 @@ XmaxWindow::XmaxWindow(QWidget *parent) : QWidget{parent} {
       this);
   }
 
-  for (uint32_t i = 0; i < DebugGraphicsTemplateLength; i++) {
-    GraphicsContainer container(&(DebugGraphicsTemplate[i]), m_aspectScale, this);
-    m_graphics.push_back(container);
-  }
+  for (uint32_t i = 0; i < DebugGraphicsTemplateLength; i++)
+    m_graphics.push_back(GraphicsContainer(&(DebugGraphicsTemplate[i]), m_aspectScale, this));
 }
 
 XmaxWindow::~XmaxWindow() {
