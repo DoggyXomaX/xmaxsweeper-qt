@@ -29,17 +29,7 @@ XmaxWindow::XmaxWindow(QWidget *parent) : QWidget{parent} {
   }
 
   for (uint32_t i = 0; i < DebugGraphicsTemplateLength; i++) {
-    auto temp = &(DebugGraphicsTemplate[i]);
-    GraphicsTemplate t = {
-      temp->path,
-      (uint32_t)(temp->x * m_aspectScale),
-      (uint32_t)(temp->y * m_aspectScale),
-      (uint32_t)(temp->width * m_aspectScale),
-      (uint32_t)(temp->height * m_aspectScale),
-      temp->transparent,
-    };
-
-    GraphicsContainer container(&t, this);
+    GraphicsContainer container(&(DebugGraphicsTemplate[i]), m_aspectScale, this);
     m_graphics.push_back(container);
   }
 }

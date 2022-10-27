@@ -9,9 +9,12 @@
 
 class GraphicsContainer {
   public:
-    GraphicsContainer(const GraphicsTemplate *graphicsTemplate, QWidget *parent);
+    GraphicsContainer(const GraphicsTemplate *graphicsTemplate, float scale, QWidget *parent);
   private:
+    void updateScale(float scale);
     QLabel *m_label;
+    int m_x, m_y, m_width, m_height;
+    float m_scale;
 };
 
 #endif // __GRAPHICSCONTAINER_H__
