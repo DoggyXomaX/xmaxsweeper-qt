@@ -8,26 +8,25 @@ XmaxWindow::XmaxWindow(QWidget *parent) : QWidget{parent} {
 
   // Copy Figma design
   setFixedSize(320, 248);
-  setStyleSheet("background-color: " BACKGROUND_COLOR ";");
+  setStyleSheet("background-color: #D9B697;");
 
-//  CREATE_BORDER(12, 1, 15, 10) // Left Timer border
-//  CREATE_BORDER(33, 1, 10, 10) // Center border
-//  CREATE_BORDER(49, 1, 15, 10) // Right Timer border
-//  CREATE_BORDER(18, 17, 40, 40) // Bomb Field
+  m_leftTimer = new MineTimer(3, 0, 14, 3, m_aspectScale, this);
+  m_rightTimer = new MineTimer(3, 0, 51, 3, m_aspectScale, this);
 
-  int tMat[4][4] = {
-    { 14, 35, 51, 20 },
-    { 3, 3, 3, 19 },
-    { 15, 10, 15, 40 },
-    { 10, 10, 10, 40 },
+  int tMat[4][2] = {
+    { 35, 20 },
+    { 3, 19 },
+    { 10, 40 },
+    { 10, 40 },
   };
 
-  for (int i = 0; i < 4; i++)
+  for (int i = 0; i < 2; i++) {
     MineBorders borders(
       tMat[T_X][i], tMat[T_Y][i],
       tMat[T_WIDTH][i], tMat[T_HEIGHT][i],
       m_aspectScale,
       this);
+  }
 
   for (uint32_t i = 0; i < DebugGraphicsTemplateLength; i++) {
     auto temp = &(DebugGraphicsTemplate[i]);
@@ -43,4 +42,8 @@ XmaxWindow::XmaxWindow(QWidget *parent) : QWidget{parent} {
     GraphicsContainer container(&t, this);
     m_graphics.push_back(container);
   }
+}
+
+XmaxWindow::~XmaxWindow() {
+  delete [] MineTimer::DigitPixmaps;
 }

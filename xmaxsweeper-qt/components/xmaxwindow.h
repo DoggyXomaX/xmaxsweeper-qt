@@ -13,28 +13,9 @@ using std::vector;
 #include "classes/graphics/graphicscontainer.h"
 #include "classes/graphics/graphicstemplate.h"
 #include "classes/mine/mineborders.h"
-
-#define BACKGROUND_COLOR "#D9B697"
-
-#define CREATE_BORDER(x, y, w, h)                                                     \
-  { ":/img/border/left-top.png",     (x),           (y),           2,   2,   false }, \
-  { ":/img/border/top.png",          (x) + 2,       (y),           (w), 2,   false }, \
-  { ":/img/border/right-top.png",    (x) + 2 + (w), (y),           2,   2,   false }, \
-  { ":/img/border/left.png",         (x),           (y) + 2,       2,   (h), false }, \
-  { ":/img/border/right.png",        (x) + 2 + (w), (y) + 2,       2,   (h), false }, \
-  { ":/img/border/left-bottom.png",  (x),           (y) + 2 + (h), 2,   2,   false }, \
-  { ":/img/border/bottom.png",       (x) + 2,       (y) + 2 + (h), (w), 2,   false }, \
-  { ":/img/border/right-bottom.png", (x) + 2 + (w), (y) + 2 + (h), 2,   2,   false },
+#include "classes/mine/minetimer.h"
 
 const GraphicsTemplate_t DebugGraphicsTemplate[] = {
-  // Numbers
-  { ":/img/number/2.png", 14, 3, 5, 10, false },
-  { ":/img/number/2.png", 19, 3, 5, 10, false },
-  { ":/img/number/8.png", 24, 3, 5, 10, false },
-  { ":/img/number/1.png", 51, 3, 5, 10, false },
-  { ":/img/number/2.png", 56, 3, 5, 10, false },
-  { ":/img/number/3.png", 61, 3, 5, 10, false },
-
   { ":/img/cell/masked.png", 35, 3, 10, 10, false }, // Xmax cell
   { ":/img/mouse/idle.png", 36, 4, 8, 8, true },
 
@@ -118,10 +99,13 @@ class XmaxWindow : public QWidget {
   Q_OBJECT
   public:
     explicit XmaxWindow(QWidget *parent = nullptr);
+    ~XmaxWindow();
     float getScale(void);
   private:
     float m_aspectScale;
     vector<GraphicsContainer> m_graphics;
+    MineTimer *m_leftTimer;
+    MineTimer *m_rightTimer;
 };
 
 #endif // __QT_XMAXWINDOW_H__

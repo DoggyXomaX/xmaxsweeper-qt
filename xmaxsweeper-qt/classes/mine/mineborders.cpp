@@ -12,23 +12,18 @@ const char *MineBorderPaths[] = {
 };
 
 MineBorders::MineBorders(int x, int y, int width, int height, float scale, QWidget *parent) {
-  m_x = x;
-  m_y = y;
-  m_width = width;
-  m_height = height;
-  m_scale = scale;
-
   for (int i = 0; i < 8; i++) {
     QPixmap pixmap(MineBorderPaths[i]);
 
-    m_borders[i] = new QLabel(parent);
+    QLabel *border = new QLabel(parent);
+    border->setPixmap(pixmap);
+    border->setScaledContents(true);
+    border->show();
 
-    m_borders[i]->setPixmap(pixmap);
-    m_borders[i]->setScaledContents(true);
-    m_borders[i]->show();
+    m_borders[i] = border;
   }
 
-  updateBorders();
+  setBorders(x, y, width, height, scale);
 }
 
 void MineBorders::setPosition(int x, int y) {
@@ -44,6 +39,15 @@ void MineBorders::setSize(int width, int height) {
 }
 
 void MineBorders::setScale(float scale) {
+  m_scale = scale;
+  updateBorders();
+}
+
+void MineBorders::setBorders(int x, int y, int width, int height, float scale) {
+  m_x = x;
+  m_y = y;
+  m_width = width;
+  m_height = height;
   m_scale = scale;
   updateBorders();
 }

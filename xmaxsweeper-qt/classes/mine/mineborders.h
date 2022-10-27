@@ -15,6 +15,7 @@ class MineBorders {
     void setPosition(int x, int y);
     void setSize(int width, int height);
     void setScale(float newScale);
+    void setBorders(int x, int y, int width, int height, float scale);
 
   private:
     void updateBorders(void);
