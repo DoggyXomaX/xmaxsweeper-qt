@@ -106,6 +106,10 @@ class XmaxWindow : public QWidget {
     vector<GraphicsContainer> m_graphics;
     MineTimer *m_leftTimer;
     MineTimer *m_rightTimer;
+
+    // Temp
+    MineBorders *m_xmaxBorders;
+    MineBorders *m_fieldBorders;
 };
 
 #endif // __QT_XMAXWINDOW_H__
