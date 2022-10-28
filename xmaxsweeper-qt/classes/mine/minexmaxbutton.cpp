@@ -40,8 +40,11 @@ MineXmaxButton::MineXmaxButton(int x, int y, int size, float scale, QWidget *par
 
   m_xmax = new QLabel(m_button);
   m_xmax->setScaledContents(true);
+  m_xmax->setStyleSheet("background-color: rgba(0, 0, 0, 0);");
   m_xmax->show();
 
+  setButtonState(0);
+  setXmaxState(0);
   updateGeometry();
 }
 
@@ -91,6 +94,6 @@ void MineXmaxButton::updateGeometry(void) {
   m_xmax->setGeometry(
     int(1.0f * m_scale),
     int(1.0f * m_scale),
-    int(m_size * 0.8f * m_scale),
-    int(m_size * 0.8f * m_scale));
+    int(float(m_size) * 0.8f * m_scale),
+    int(float(m_size) * 0.8f * m_scale));
 }

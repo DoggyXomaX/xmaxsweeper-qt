@@ -15,9 +15,6 @@
 #include "classes/mine/minexmaxbutton.h"
 
 const GraphicsTemplate_t DebugGraphicsTemplate[] = {
-  { ":/img/cell/masked.png", 35, 3, 10, 10, false }, // Xmax cell
-  { ":/img/mouse/idle.png", 36, 4, 8, 8, true },
-
   // No comments, just copy & paste
   { ":/img/cell/masked.png", 20, 19, 5, 5, false },
   { ":/img/cell/masked.png", 20, 24, 5, 5, false },
