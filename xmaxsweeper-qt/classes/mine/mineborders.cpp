@@ -26,6 +26,11 @@ MineBorders::MineBorders(int x, int y, int width, int height, float scale, QWidg
   setBorders(x, y, width, height, scale);
 }
 
+MineBorders::~MineBorders() {
+  for (int i = 0; i < 8; i++)
+    delete m_borders[i];
+}
+
 void MineBorders::setPosition(int x, int y) {
   m_x = x;
   m_y = y;
@@ -80,7 +85,7 @@ void MineBorders::updateBorders() {
 
   for (int i = 0; i < 8; i++)
     m_borders[i]->setGeometry(
-      cols[tMat[T_X][i]], rows[tMat[T_Y][i]],
-      sizes[tMat[T_WIDTH][i]], sizes[tMat[T_HEIGHT][i]]
+      cols[tMat[0][i]], rows[tMat[1][i]],
+      sizes[tMat[2][i]], sizes[tMat[3][i]]
     );
 }

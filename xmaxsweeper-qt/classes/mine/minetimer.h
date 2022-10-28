@@ -13,6 +13,7 @@ class MineTimer {
 
   public:
     MineTimer(uint32_t digitCount, uint32_t value, int x, int y, float scale, QWidget *parent);
+    ~MineTimer();
     void setValue(uint32_t value);
     void setPosition(int x, int y);
     void setScale(float scale);

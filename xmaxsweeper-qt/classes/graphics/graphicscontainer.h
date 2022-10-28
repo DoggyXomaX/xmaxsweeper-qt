@@ -10,6 +10,7 @@
 class GraphicsContainer {
   public:
     GraphicsContainer(const GraphicsTemplate *graphicsTemplate, float scale, QWidget *parent);
+    ~GraphicsContainer();
   private:
     void updateScale(float scale);
     QLabel *m_label;

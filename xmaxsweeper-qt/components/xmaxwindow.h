@@ -7,9 +7,6 @@
 #include <QWidget>
 #include <QMessageBox>
 
-#include <vector>
-using std::vector;
-
 #include "classes/graphics/graphicscontainer.h"
 #include "classes/graphics/graphicstemplate.h"
 #include "classes/mine/mineborders.h"
@@ -103,7 +100,7 @@ class XmaxWindow : public QWidget {
     float getScale(void);
   private:
     float m_aspectScale;
-    vector<GraphicsContainer> m_graphics;
+    GraphicsContainer **m_graphics;
     MineTimer *m_leftTimer;
     MineTimer *m_rightTimer;
 

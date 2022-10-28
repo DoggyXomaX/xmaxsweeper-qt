@@ -52,6 +52,13 @@ MineTimer::MineTimer(
   updateDigits();
 }
 
+MineTimer::~MineTimer() {
+  delete m_borders;
+  for (uint32_t i = 0; i < m_digitCount; i++)
+    delete m_digits[i];
+  delete m_digits;
+}
+
 void MineTimer::setValue(uint32_t value) {
   m_value = value;
   updateDigits();

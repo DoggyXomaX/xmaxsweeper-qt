@@ -1,15 +1,18 @@
 #include <QApplication>
 #include <QPushButton>
-#include <QImage>
 
 #include "components/xmaxwindow.h"
 
 int main(int argc, char *argv[])
 {
-    QApplication app(argc, argv);
+  QApplication app(argc, argv);
 
-    XmaxWindow *window = new XmaxWindow();
-    window->show();
+  XmaxWindow *window = new XmaxWindow();
+  window->show();
 
-    return app.exec();
+  int result = app.exec();
+
+  delete window;
+
+  return result;
 }

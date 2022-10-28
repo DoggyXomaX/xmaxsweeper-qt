@@ -18,6 +18,10 @@ GraphicsContainer::GraphicsContainer(const GraphicsTemplate *graphicsTemplate, f
   updateScale(scale);
 }
 
+GraphicsContainer::~GraphicsContainer() {
+  delete m_label;
+}
+
 void GraphicsContainer::updateScale(float newScale) {
   m_scale = newScale;
   m_label->setGeometry(
