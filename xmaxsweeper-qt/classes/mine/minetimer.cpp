@@ -48,7 +48,7 @@ MineTimer::MineTimer(
     m_digits[i]->setScaledContents(true);
   }
 
-  updateRect();
+  updateGeometry();
   updateDigits();
 }
 
@@ -67,12 +67,12 @@ void MineTimer::setValue(uint32_t value) {
 void MineTimer::setPosition(int x, int y) {
   m_x = x;
   m_y = y;
-  updateRect();
+  updateGeometry();
 }
 
 void MineTimer::setScale(float scale) {
   m_scale = scale;
-  updateRect();
+  updateGeometry();
 }
 
 void MineTimer::updateDigits() {
@@ -85,7 +85,7 @@ void MineTimer::updateDigits() {
   }
 }
 
-void MineTimer::updateRect() {
+void MineTimer::updateGeometry() {
   m_borders->setBorders(m_x, m_y, DigitWidth * m_digitCount, DigitHeight, m_scale);
   for (uint32_t i = 0; i < m_digitCount; i++)
     m_digits[i]->setGeometry(

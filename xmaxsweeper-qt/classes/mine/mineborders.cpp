@@ -34,18 +34,18 @@ MineBorders::~MineBorders() {
 void MineBorders::setPosition(int x, int y) {
   m_x = x;
   m_y = y;
-  updateBorders();
+  updateGeometry();
 }
 
 void MineBorders::setSize(int width, int height) {
   m_width = width;
   m_height = height;
-  updateBorders();
+  updateGeometry();
 }
 
 void MineBorders::setScale(float scale) {
   m_scale = scale;
-  updateBorders();
+  updateGeometry();
 }
 
 void MineBorders::setBorders(int x, int y, int width, int height, float scale) {
@@ -54,10 +54,10 @@ void MineBorders::setBorders(int x, int y, int width, int height, float scale) {
   m_width = width;
   m_height = height;
   m_scale = scale;
-  updateBorders();
+  updateGeometry();
 }
 
-void MineBorders::updateBorders() {
+void MineBorders::updateGeometry() {
   int sizes[] = {
     int(2 * m_scale),
     int(m_width * m_scale),

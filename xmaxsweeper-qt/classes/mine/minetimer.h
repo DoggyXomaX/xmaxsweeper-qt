@@ -19,14 +19,14 @@ class MineTimer {
     void setScale(float scale);
 
   private:
-    void updateRect(void);
+    void updateGeometry(void);
     void updateDigits(void);
 
     MineBorders *m_borders;
+    QLabel **m_digits;
     uint32_t m_digitCount, m_value;
     int m_x, m_y;
     float m_scale;
-    QLabel **m_digits;
 };
 
 #endif // __MINETIMER_H__
