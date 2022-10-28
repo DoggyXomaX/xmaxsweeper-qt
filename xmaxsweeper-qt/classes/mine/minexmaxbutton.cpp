@@ -47,8 +47,8 @@ MineXmaxButton::MineXmaxButton(int x, int y, int size, float scale, QWidget *par
 
 MineXmaxButton::~MineXmaxButton() {
   delete m_borders;
-  delete m_button;
   delete m_xmax;
+  delete m_button;
 }
 
 void MineXmaxButton::setPosition(int x, int y) {
@@ -71,16 +71,26 @@ void MineXmaxButton::setButtonState(uint32_t buttonState) {
   if (buttonState > 2) // 0 - Idle, 1 - Hover, 2 - Press
     return;
 
-  // update Pixmap of button
+  m_button->setPixmap(MineXmaxButton::ButtonPixmaps[buttonState]);
 }
 
 void MineXmaxButton::setXmaxState(uint32_t xmaxState) {
   if (xmaxState > 4) // 0 - Idle, 1 - Hover, 2 - Press, 3 - Win, 4 - Lose
     return;
 
-  // update Pixmap of xmax
+  m_xmax->setPixmap(MineXmaxButton::XmaxPixmaps[xmaxState]);
 }
 
 void MineXmaxButton::updateGeometry(void) {
-  // update Geometry
+  m_borders->setBorders(m_x, m_y, m_size, m_size, m_scale);
+  m_button->setGeometry(
+    int(m_x * m_scale),
+    int(m_y * m_scale),
+    int(m_size * m_scale),
+    int(m_size * m_scale));
+  m_xmax->setGeometry(
+    int(1.0f * m_scale),
+    int(1.0f * m_scale),
+    int(m_size * 0.8f * m_scale),
+    int(m_size * 0.8f * m_scale));
 }

@@ -13,7 +13,9 @@ XmaxWindow::XmaxWindow(QWidget *parent) : QWidget{parent} {
   m_leftTimer = new MineTimer(3, 0, 14, 3, m_aspectScale, this);
   m_rightTimer = new MineTimer(3, 0, 51, 3, m_aspectScale, this);
 
-  m_xmaxBorders = new MineBorders(35, 3, 10, 10, m_aspectScale, this);
+//  m_xmaxBorders = new MineBorders(35, 3, 10, 10, m_aspectScale, this);
+  m_xmaxButton = new MineXmaxButton(35, 3, 10, m_aspectScale, this);
+
   m_fieldBorders = new MineBorders(20, 19, 40, 40, m_aspectScale, this);
 
   m_graphics = new GraphicsContainer*[DebugGraphicsTemplateLength];
@@ -32,7 +34,8 @@ XmaxWindow::~XmaxWindow() {
 
   delete m_leftTimer;
   delete m_rightTimer;
-  delete m_xmaxBorders;
+  delete m_xmaxButton;
+
   delete m_fieldBorders;
 
   for (uint32_t i = 0; i < DebugGraphicsTemplateLength; i++)

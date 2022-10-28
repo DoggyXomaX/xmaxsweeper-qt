@@ -106,8 +106,8 @@ class XmaxWindow : public QWidget {
     MineTimer *m_leftTimer;
     MineTimer *m_rightTimer;
 
+    MineXmaxButton *m_xmaxButton;
     // Temp
-    MineBorders *m_xmaxBorders;
     MineBorders *m_fieldBorders;
 };
 
