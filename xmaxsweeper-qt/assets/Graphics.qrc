@@ -20,5 +20,11 @@
         <file>img/number/8.png</file>
         <file>img/number/9.png</file>
         <file>img/cell/masked.png</file>
+        <file>img/cell/masked-hover.png</file>
+        <file>img/cell/masked-press.png</file>
+        <file>img/mouse/hover.png</file>
+        <file>img/mouse/lose.png</file>
+        <file>img/mouse/press.png</file>
+        <file>img/mouse/win.png</file>
     </qresource>
 </RCC>

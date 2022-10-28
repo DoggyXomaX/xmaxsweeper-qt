@@ -22,7 +22,13 @@ XmaxWindow::XmaxWindow(QWidget *parent) : QWidget{parent} {
 }
 
 XmaxWindow::~XmaxWindow() {
-  delete [] MineTimer::DigitPixmaps;
+  if (MineTimer::DigitPixmapsInitialized)
+    delete [] MineTimer::DigitPixmaps;
+
+  if (MineXmaxButton::PixmapsInitialized) {
+    delete [] MineXmaxButton::ButtonPixmaps;
+    delete [] MineXmaxButton::XmaxPixmaps;
+  }
 
   delete m_leftTimer;
   delete m_rightTimer;

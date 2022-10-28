@@ -9,8 +9,10 @@
 
 #include "classes/graphics/graphicscontainer.h"
 #include "classes/graphics/graphicstemplate.h"
+
 #include "classes/mine/mineborders.h"
 #include "classes/mine/minetimer.h"
+#include "classes/mine/minexmaxbutton.h"
 
 const GraphicsTemplate_t DebugGraphicsTemplate[] = {
   { ":/img/cell/masked.png", 35, 3, 10, 10, false }, // Xmax cell

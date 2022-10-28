@@ -7,6 +7,12 @@
 
 class MineXmaxButton {
   public:
+    static bool PixmapsInitialized;
+    static const char *ButtonPixmapsPaths[];
+    static QPixmap *ButtonPixmaps;
+    static const char *XmaxPixmapsPaths[];
+    static QPixmap *XmaxPixmaps;
+
     MineXmaxButton(int x, int y, int size, float scale, QWidget *parent);
     ~MineXmaxButton();
     void setPosition(int x, int y);
@@ -18,8 +24,8 @@ class MineXmaxButton {
   private:
     void updateGeometry(void);
 
-    QPixmap **m_buttonPixmaps;
-    QPixmap **m_xmaxPixmaps;
+    QPixmap *m_buttonPixmaps;
+    QPixmap *m_xmaxPixmaps;
 
     MineBorders *m_borders;
     QLabel *m_button;
