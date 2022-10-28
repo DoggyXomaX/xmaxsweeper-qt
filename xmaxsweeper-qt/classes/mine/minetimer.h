@@ -8,7 +8,7 @@ class MineTimer {
     static const uint32_t DigitWidth;
     static const uint32_t DigitHeight;
     static const char *DigitPaths[];
-    static bool DigitPixmapInitialized;
+    static bool DigitPixmapsInitialized;
     static QPixmap *DigitPixmaps;
 
   public:

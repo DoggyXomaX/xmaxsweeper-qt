@@ -14,7 +14,7 @@ const char *MineTimer::DigitPaths[] = {
   ":/img/number/8.png",
   ":/img/number/9.png",
 };
-bool MineTimer::DigitPixmapInitialized = false;
+bool MineTimer::DigitPixmapsInitialized = false;
 QPixmap *MineTimer::DigitPixmaps = nullptr;
 
 MineTimer::MineTimer(
@@ -35,8 +35,8 @@ MineTimer::MineTimer(
     m_scale,
     parent);
 
-  if (!MineTimer::DigitPixmapInitialized) {
-    MineTimer::DigitPixmapInitialized = true;
+  if (!MineTimer::DigitPixmapsInitialized) {
+    MineTimer::DigitPixmapsInitialized = true;
     MineTimer::DigitPixmaps = new QPixmap[10];
     for (int i = 0; i < 10; i++)
       MineTimer::DigitPixmaps[i] = QPixmap(MineTimer::DigitPaths[i]);
