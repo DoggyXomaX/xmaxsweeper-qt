@@ -126,10 +126,10 @@ void Mine::Field::createField(uint32_t countX, uint32_t countY) {
   m_countY = countY;
 
   const uint32_t length = m_countX * m_countY;
-  m_field = new MineButton*[length];
+  m_field = new StateButton*[length];
   m_fieldIndexes = new uint32_t[length];
   for (uint32_t i = 0; i < length; i++) {
-    m_field[i] = new MineButton;
+    m_field[i] = new StateButton;
     m_field[i]->setParent(m_parent);
     m_field[i]->setScaledContents(true);
     m_field[i]->setStatePixmaps(&CellPixmaps[0], &CellPixmaps[1], &CellPixmaps[2]);

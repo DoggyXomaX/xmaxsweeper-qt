@@ -8,7 +8,7 @@
 #include <cstdlib>
 
 #include "mineborders.h"
-#include "components/minebutton.h"
+#include "components/statebutton.h"
 
 namespace Mine {
   class Field {
@@ -33,7 +33,7 @@ namespace Mine {
 
       QWidget *m_parent;
       Borders *m_borders;
-      MineButton **m_field;
+      StateButton **m_field;
       uint32_t m_countX, m_countY;
 
       uint32_t *m_fieldIndexes;

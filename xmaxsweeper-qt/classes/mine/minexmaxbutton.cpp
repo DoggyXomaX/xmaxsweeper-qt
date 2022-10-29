@@ -34,7 +34,7 @@ Mine::XmaxButton::XmaxButton(int x, int y, int size, float scale, QWidget *paren
       XmaxPixmaps[i] = QPixmap(XmaxPixmapsPaths[i]);
   }
 
-  m_button = new MineButton;
+  m_button = new StateButton;
   m_button->setParent(parent);
   m_button->setScaledContents(true);
   m_button->setStatePixmaps(&ButtonPixmaps[0], &ButtonPixmaps[1], &ButtonPixmaps[2]);

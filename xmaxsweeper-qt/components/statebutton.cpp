@@ -1,6 +1,6 @@
-#include "minebutton.h"
+#include "statebutton.h"
 
-MineButton::MineButton(QWidget *parent, Qt::WindowFlags f) : QLabel(parent) {
+StateButton::StateButton(QWidget *parent, Qt::WindowFlags f) : QLabel(parent) {
   Q_UNUSED(f);
   this->setAttribute(Qt::WA_Hover, true);
   m_normal = nullptr;
@@ -8,37 +8,37 @@ MineButton::MineButton(QWidget *parent, Qt::WindowFlags f) : QLabel(parent) {
   m_press = nullptr;
 }
 
-MineButton::~MineButton() {}
+StateButton::~StateButton() {}
 
-void MineButton::setStatePixmaps(QPixmap *normal, QPixmap *hover, QPixmap *press) {
+void StateButton::setStatePixmaps(QPixmap *normal, QPixmap *hover, QPixmap *press) {
   m_normal = normal;
   m_hover = hover;
   m_press = press;
   this->leaveEvent(nullptr);
 }
 
-void MineButton::enterEvent(QEnterEvent *e) {
+void StateButton::enterEvent(QEnterEvent *e) {
   Q_UNUSED(e);
   if (m_hover == nullptr)
     return;
   this->setPixmap(*m_hover);
 }
 
-void MineButton::leaveEvent(QEvent *e) {
+void StateButton::leaveEvent(QEvent *e) {
   Q_UNUSED(e);
   if (m_normal == nullptr)
     return;
   this->setPixmap(*m_normal);
 }
 
-void MineButton::mousePressEvent(QMouseEvent *e) {
+void StateButton::mousePressEvent(QMouseEvent *e) {
   Q_UNUSED(e);
   if (m_press == nullptr)
     return;
   this->setPixmap(*m_press);
 }
 
-void MineButton::mouseReleaseEvent(QMouseEvent *e) {
+void StateButton::mouseReleaseEvent(QMouseEvent *e) {
   Q_UNUSED(e);
   if (m_normal == nullptr)
     return;

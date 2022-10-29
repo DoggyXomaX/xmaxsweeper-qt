@@ -6,7 +6,7 @@
 #include <QPixmap>
 
 #include "mineborders.h"
-#include "components/minebutton.h"
+#include "components/statebutton.h"
 
 namespace Mine {
   class XmaxButton {
@@ -32,7 +32,7 @@ namespace Mine {
       QPixmap *m_xmaxPixmaps;
 
       Borders *m_borders;
-      MineButton *m_button;
+      StateButton *m_button;
       QLabel *m_xmax;
       int m_x, m_y, m_size;
       float m_scale;

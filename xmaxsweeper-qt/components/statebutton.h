@@ -9,11 +9,11 @@
 #include <QEnterEvent>
 #include <QPixmap>
 
-class MineButton : public QLabel {
+class StateButton : public QLabel {
   Q_OBJECT
   public:
-    explicit MineButton(QWidget *parent = Q_NULLPTR, Qt::WindowFlags f = Qt::WindowFlags());
-    ~MineButton();
+    explicit StateButton(QWidget *parent = Q_NULLPTR, Qt::WindowFlags f = Qt::WindowFlags());
+    ~StateButton();
     void setStatePixmaps(QPixmap *normal, QPixmap *hover, QPixmap *press);
 
   protected:
