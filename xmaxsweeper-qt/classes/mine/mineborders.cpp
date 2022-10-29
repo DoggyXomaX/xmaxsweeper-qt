@@ -12,6 +12,7 @@ const char *MineBorderPaths[] = {
 };
 
 MineBorders::MineBorders(int x, int y, int width, int height, float scale, QWidget *parent) {
+  m_borders = new QLabel*[8];
   for (int i = 0; i < 8; i++) {
     QPixmap pixmap(MineBorderPaths[i]);
 
@@ -29,6 +30,7 @@ MineBorders::MineBorders(int x, int y, int width, int height, float scale, QWidg
 MineBorders::~MineBorders() {
   for (int i = 0; i < 8; i++)
     delete m_borders[i];
+  delete [] m_borders;
 }
 
 void MineBorders::setPosition(int x, int y) {

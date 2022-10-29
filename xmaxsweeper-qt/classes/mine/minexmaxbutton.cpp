@@ -71,14 +71,14 @@ void MineXmaxButton::setScale(float scale) {
 }
 
 void MineXmaxButton::setButtonState(uint32_t buttonState) {
-  if (buttonState > 2) // 0 - Idle, 1 - Hover, 2 - Press
+  if (buttonState >= 3) // 0 - Idle, 1 - Hover, 2 - Press
     return;
 
   m_button->setPixmap(MineXmaxButton::ButtonPixmaps[buttonState]);
 }
 
 void MineXmaxButton::setXmaxState(uint32_t xmaxState) {
-  if (xmaxState > 4) // 0 - Idle, 1 - Hover, 2 - Press, 3 - Win, 4 - Lose
+  if (xmaxState >= 5) // 0 - Idle, 1 - Hover, 2 - Press, 3 - Win, 4 - Lose
     return;
 
   m_xmax->setPixmap(MineXmaxButton::XmaxPixmaps[xmaxState]);

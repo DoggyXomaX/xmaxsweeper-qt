@@ -6,17 +6,17 @@ CONFIG += c++11
 SOURCES += \
     classes/mine/minexmaxbutton.cpp \
     classes/mine/mineborders.cpp \
-    classes/graphics/graphicscontainer.cpp \
     classes/mine/minetimer.cpp \
+    classes/mine/minefield.cpp \
     components/xmaxwindow.cpp \
     main.cpp
 
 HEADERS += \
-    classes/graphics/graphicscontainer.h \
-    classes/graphics/graphicstemplate.h \
+    classes/mine/minecell.h \
     classes/mine/mineborders.h \
     classes/mine/minetimer.h \
     classes/mine/minexmaxbutton.h \
+    classes/mine/minefield.h \
     components/xmaxwindow.h
 
 RESOURCES += \

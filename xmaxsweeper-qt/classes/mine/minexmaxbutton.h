@@ -1,7 +1,9 @@
 #ifndef __MINEXMAXBUTTON_H__
 #define __MINEXMAXBUTTON_H__
 
+#include <QWidget>
 #include <QLabel>
+#include <QPixmap>
 
 #include "mineborders.h"
 

@@ -1,6 +1,7 @@
 #ifndef __MINEBORDERS_H__
 #define __MINEBORDERS_H__
 
+#include <QWidget>
 #include <QLabel>
 #include <QPixmap>
 
@@ -16,7 +17,7 @@ class MineBorders {
   private:
     void updateGeometry(void);
 
-    QLabel *m_borders[8];
+    QLabel **m_borders;
     int m_x, m_y;
     int m_width, m_height;
     float m_scale;

@@ -1,6 +1,10 @@
 #ifndef __MINETIMER_H__
 #define __MINETIMER_H__
 
+#include <QWidget>
+#include <QLabel>
+#include <QPixmap>
+
 #include "mineborders.h"
 
 class MineTimer {
