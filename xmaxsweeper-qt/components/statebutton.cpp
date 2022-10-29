@@ -33,7 +33,7 @@ void StateButton::leaveEvent(QEvent *e) {
 
 void StateButton::mousePressEvent(QMouseEvent *e) {
   Q_UNUSED(e);
-  if (e->button() != 0)
+  if (e->button() != Qt::LeftButton)
     return;
   if (m_press == nullptr)
     return;
@@ -42,7 +42,7 @@ void StateButton::mousePressEvent(QMouseEvent *e) {
 
 void StateButton::mouseReleaseEvent(QMouseEvent *e) {
   Q_UNUSED(e);
-  if (e->button() != 0)
+  if (e->button() != Qt::LeftButton)
     return;
   if (m_normal == nullptr)
     return;
