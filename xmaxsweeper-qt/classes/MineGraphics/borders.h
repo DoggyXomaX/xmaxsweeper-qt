@@ -5,7 +5,7 @@
 #include <QLabel>
 #include <QPixmap>
 
-namespace Mine {
+namespace MineGraphics {
   class Borders {
     public:
       static const char *MineBorderPaths[];
