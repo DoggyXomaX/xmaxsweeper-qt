@@ -33,6 +33,8 @@ void StateButton::leaveEvent(QEvent *e) {
 
 void StateButton::mousePressEvent(QMouseEvent *e) {
   Q_UNUSED(e);
+  if (e->button() != 0)
+    return;
   if (m_press == nullptr)
     return;
   this->setPixmap(*m_press);
@@ -40,6 +42,8 @@ void StateButton::mousePressEvent(QMouseEvent *e) {
 
 void StateButton::mouseReleaseEvent(QMouseEvent *e) {
   Q_UNUSED(e);
+  if (e->button() != 0)
+    return;
   if (m_normal == nullptr)
     return;
   this->setPixmap(*m_normal);
