@@ -7,9 +7,9 @@
 #include <QWidget>
 #include <QMessageBox>
 
-#include "classes/mine/minetimer.h"
-#include "classes/mine/minexmaxbutton.h"
-#include "classes/mine/minefield.h"
+#include "classes/mine/timer.h"
+#include "classes/mine/xmaxbutton.h"
+#include "classes/mine/field.h"
 
 class XmaxWindow : public QWidget {
   Q_OBJECT
