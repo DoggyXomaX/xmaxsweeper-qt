@@ -13,7 +13,6 @@ XmaxWindow::XmaxWindow(QWidget *parent) : QWidget{parent} {
   m_leftTimer = new MineTimer(3, 0, 14, 3, m_aspectScale, this);
   m_rightTimer = new MineTimer(3, 0, 51, 3, m_aspectScale, this);
   m_xmaxButton = new MineXmaxButton(35, 3, 10, m_aspectScale, this);
-//  m_fieldBorders = new MineBorders(20, 19, 40, 40, m_aspectScale, this);
   m_field = new MineField(8, 8, 20, 19, 5, m_aspectScale, this);
 }
 
