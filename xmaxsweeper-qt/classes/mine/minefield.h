@@ -5,7 +5,10 @@
 #include <QLabel>
 #include <QPixmap>
 
+#include <cstdlib>
+
 #include "mineborders.h"
+#include "components/minebutton.h"
 
 class MineField {
   public:

@@ -34,8 +34,10 @@ MineXmaxButton::MineXmaxButton(int x, int y, int size, float scale, QWidget *par
       MineXmaxButton::XmaxPixmaps[i] = QPixmap(MineXmaxButton::XmaxPixmapsPaths[i]);
   }
 
-  m_button = new QLabel(parent);
+  m_button = new MineButton;
+  m_button->setParent(parent);
   m_button->setScaledContents(true);
+  m_button->setStatePixmaps(&MineXmaxButton::ButtonPixmaps[0], &MineXmaxButton::ButtonPixmaps[1], &MineXmaxButton::ButtonPixmaps[2]);
   m_button->show();
 
   m_xmax = new QLabel(m_button);

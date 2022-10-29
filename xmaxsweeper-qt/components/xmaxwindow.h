@@ -7,7 +7,6 @@
 #include <QWidget>
 #include <QMessageBox>
 
-#include "classes/mine/mineborders.h"
 #include "classes/mine/minetimer.h"
 #include "classes/mine/minexmaxbutton.h"
 #include "classes/mine/minefield.h"

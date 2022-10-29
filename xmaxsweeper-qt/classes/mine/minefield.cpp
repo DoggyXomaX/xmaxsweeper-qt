@@ -44,9 +44,12 @@ MineField::MineField(uint32_t countX, uint32_t countY, int x, int y, int size, f
   }
 
   m_borders = new MineBorders(x, y, size, size, scale, parent);
-
   createField(countX, countY);
   updateGeometry();
+
+  for (uint32_t y = 0; y < 8; y++)
+    for (uint32_t x = 0; x < 8; x++)
+      setCell(rand() % CellPixmapPathsLength, x, y);
 }
 
 MineField::~MineField() {
@@ -81,7 +84,7 @@ void MineField::setCell(uint32_t index, uint32_t x, uint32_t y) {
   if (index >= CellPixmapPathsLength)
     return;
 
-  if (x < 0 || x >= m_countX || y < 0 || y >= m_countY)
+  if (x >= m_countX || y >= m_countY)
     return;
 
   uint32_t i = y * m_countX + x;
