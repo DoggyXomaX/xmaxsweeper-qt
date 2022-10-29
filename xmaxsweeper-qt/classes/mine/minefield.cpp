@@ -48,9 +48,9 @@ MineField::MineField(uint32_t countX, uint32_t countY, int x, int y, int size, f
   updateGeometry();
 
   // Uncomment to test randomize
-  //  for (uint32_t y = 0; y < 8; y++)
-  //    for (uint32_t x = 0; x < 8; x++)
-  //      setCell(rand() % CellPixmapPathsLength, x, y);
+  for (uint32_t y = 0; y < 8; y++)
+    for (uint32_t x = 0; x < 8; x++)
+      setCell(rand() % 10, x, y);
 }
 
 MineField::~MineField() {
@@ -90,7 +90,22 @@ void MineField::setCell(uint32_t index, uint32_t x, uint32_t y) {
 
   uint32_t i = y * m_countX + x;
   m_fieldIndexes[i] = index;
-  m_field[i]->setPixmap(MineField::CellPixmaps[index]);
+
+  uint32_t offset = index <= 2 ? 0 : index <= 5 ? 3 : index <= 8 ? 6 : 0;
+  switch (index) {
+    case 0: case 1: case 2:
+    case 3: case 4: case 5:
+    case 6: case 7: case 8:
+      m_field[i]->setStatePixmaps(
+        &MineField::CellPixmaps[offset],
+        &MineField::CellPixmaps[offset + 1],
+        &MineField::CellPixmaps[offset + 2]);
+      break;
+    default:
+      m_field[i]->setStatePixmaps(nullptr, nullptr, nullptr);
+      m_field[i]->setPixmap(MineField::CellPixmaps[index]);
+      break;
+  }
 }
 
 void MineField::updateGeometry() {
