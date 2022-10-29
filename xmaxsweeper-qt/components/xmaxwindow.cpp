@@ -2,12 +2,14 @@
 
 XmaxWindow::XmaxWindow(QWidget *parent) : QWidget{parent} {
   // Temporary 4.0f
-  m_aspectScale = 4.0f;
+  m_aspectScale = 12.0f;
 
   QResource::registerResource("Graphics.qrc");
 
   // Copy Figma design
-  setFixedSize(320, 248);
+  setFixedSize(
+    int(float(80) * m_aspectScale),
+    int(float(62) * m_aspectScale));
   setStyleSheet("background-color: #D9B697;");
 
   m_leftTimer = new MineGraphics::Timer(3, 0, 14, 3, m_aspectScale, this);
