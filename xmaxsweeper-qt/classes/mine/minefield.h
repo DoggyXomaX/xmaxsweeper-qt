@@ -32,7 +32,7 @@ class MineField {
 
     QWidget *m_parent;
     MineBorders *m_borders;
-    QLabel **m_field;
+    MineButton **m_field;
     uint32_t m_countX, m_countY;
 
     uint32_t *m_fieldIndexes;

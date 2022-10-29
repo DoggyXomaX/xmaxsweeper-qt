@@ -47,9 +47,10 @@ MineField::MineField(uint32_t countX, uint32_t countY, int x, int y, int size, f
   createField(countX, countY);
   updateGeometry();
 
-  for (uint32_t y = 0; y < 8; y++)
-    for (uint32_t x = 0; x < 8; x++)
-      setCell(rand() % CellPixmapPathsLength, x, y);
+  // Uncomment to test randomize
+  //  for (uint32_t y = 0; y < 8; y++)
+  //    for (uint32_t x = 0; x < 8; x++)
+  //      setCell(rand() % CellPixmapPathsLength, x, y);
 }
 
 MineField::~MineField() {
@@ -110,12 +111,13 @@ void MineField::createField(uint32_t countX, uint32_t countY) {
   m_countY = countY;
 
   const uint32_t length = m_countX * m_countY;
-  m_field = new QLabel*[length];
+  m_field = new MineButton*[length];
   m_fieldIndexes = new uint32_t[length];
   for (uint32_t i = 0; i < length; i++) {
-    m_field[i] = new QLabel(m_parent);
+    m_field[i] = new MineButton;
+    m_field[i]->setParent(m_parent);
     m_field[i]->setScaledContents(true);
-    m_field[i]->setPixmap(MineField::CellPixmaps[0]);
+    m_field[i]->setStatePixmaps(&MineField::CellPixmaps[0], &MineField::CellPixmaps[1], &MineField::CellPixmaps[2]);
     m_field[i]->show();
 
     m_fieldIndexes[i] = 0;
