@@ -8,6 +8,9 @@
 namespace Mine {
   class Borders {
     public:
+      static const char *MineBorderPaths[];
+
+    public:
       Borders(int x, int y, int width, int height, float scale, QWidget *parent);
       ~Borders();
       void setPosition(int x, int y);
