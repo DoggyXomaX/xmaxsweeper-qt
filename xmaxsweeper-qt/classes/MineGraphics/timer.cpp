@@ -1,8 +1,8 @@
 #include "timer.h"
 
-const uint32_t Mine::Timer::DigitWidth = 5;
-const uint32_t Mine::Timer::DigitHeight = 10;
-const char *Mine::Timer::DigitPaths[] = {
+const uint32_t MineGraphics::Timer::DigitWidth = 5;
+const uint32_t MineGraphics::Timer::DigitHeight = 10;
+const char *MineGraphics::Timer::DigitPaths[] = {
   ":/img/number/0.png",
   ":/img/number/1.png",
   ":/img/number/2.png",
@@ -14,10 +14,10 @@ const char *Mine::Timer::DigitPaths[] = {
   ":/img/number/8.png",
   ":/img/number/9.png",
 };
-bool Mine::Timer::DigitPixmapsInitialized = false;
-QPixmap *Mine::Timer::DigitPixmaps = nullptr;
+bool MineGraphics::Timer::DigitPixmapsInitialized = false;
+QPixmap *MineGraphics::Timer::DigitPixmaps = nullptr;
 
-Mine::Timer::Timer(
+MineGraphics::Timer::Timer(
     uint32_t digitCount, uint32_t value,
     int x, int y,
     float scale,
@@ -52,30 +52,30 @@ Mine::Timer::Timer(
   updateDigits();
 }
 
-Mine::Timer::~Timer() {
+MineGraphics::Timer::~Timer() {
   delete m_borders;
   for (uint32_t i = 0; i < m_digitCount; i++)
     delete m_digits[i];
   delete [] m_digits;
 }
 
-void Mine::Timer::setValue(uint32_t value) {
+void MineGraphics::Timer::setValue(uint32_t value) {
   m_value = value;
   updateDigits();
 }
 
-void Mine::Timer::setPosition(int x, int y) {
+void MineGraphics::Timer::setPosition(int x, int y) {
   m_x = x;
   m_y = y;
   updateGeometry();
 }
 
-void Mine::Timer::setScale(float scale) {
+void MineGraphics::Timer::setScale(float scale) {
   m_scale = scale;
   updateGeometry();
 }
 
-void Mine::Timer::updateDigits() {
+void MineGraphics::Timer::updateDigits() {
   uint32_t divider = uint32_t(powf(10, m_digitCount));
   uint32_t digitValue = m_value % divider;
   for (uint32_t i = 0 ; i < m_digitCount; i++) {
@@ -85,7 +85,7 @@ void Mine::Timer::updateDigits() {
   }
 }
 
-void Mine::Timer::updateGeometry() {
+void MineGraphics::Timer::updateGeometry() {
   m_borders->setBorders(m_x, m_y, DigitWidth * m_digitCount, DigitHeight, m_scale);
   for (uint32_t i = 0; i < m_digitCount; i++)
     m_digits[i]->setGeometry(

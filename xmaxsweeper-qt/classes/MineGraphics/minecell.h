@@ -1,7 +1,7 @@
 #ifndef __MINECELL_H__
 #define __MINECELL_H__
 
-namespace Mine {
+namespace MineGraphics {
   union Cell_u {
     struct Cell_s {
       unsigned char value : 5;

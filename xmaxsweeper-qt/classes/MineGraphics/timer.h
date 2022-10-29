@@ -7,7 +7,7 @@
 
 #include "borders.h"
 
-namespace Mine {
+namespace MineGraphics {
   class Timer {
     public:
       static const uint32_t DigitWidth;

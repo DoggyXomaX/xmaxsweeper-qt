@@ -10,7 +10,7 @@
 #include "borders.h"
 #include "components/statebutton.h"
 
-namespace Mine {
+namespace MineGraphics {
   class Field {
     public:
       static const char *CellPixmapPaths[];

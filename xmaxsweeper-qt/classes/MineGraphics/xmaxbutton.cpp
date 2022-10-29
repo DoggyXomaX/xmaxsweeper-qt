@@ -1,22 +1,22 @@
 #include "xmaxbutton.h"
 
-bool Mine::XmaxButton::PixmapsInitialized = false;
-const char *Mine::XmaxButton::ButtonPixmapsPaths[] = {
+bool MineGraphics::XmaxButton::PixmapsInitialized = false;
+const char *MineGraphics::XmaxButton::ButtonPixmapsPaths[] = {
   ":/img/cell/masked.png",
   ":/img/cell/masked-hover.png",
   ":/img/cell/masked-press.png",
 };
-QPixmap *Mine::XmaxButton::ButtonPixmaps = nullptr;
-const char *Mine::XmaxButton::XmaxPixmapsPaths[] = {
+QPixmap *MineGraphics::XmaxButton::ButtonPixmaps = nullptr;
+const char *MineGraphics::XmaxButton::XmaxPixmapsPaths[] = {
   ":/img/mouse/idle.png",
   ":/img/mouse/hover.png",
   ":/img/mouse/press.png",
   ":/img/mouse/win.png",
   ":/img/mouse/lose.png",
 };
-QPixmap *Mine::XmaxButton::XmaxPixmaps = nullptr;
+QPixmap *MineGraphics::XmaxButton::XmaxPixmaps = nullptr;
 
-Mine::XmaxButton::XmaxButton(int x, int y, int size, float scale, QWidget *parent) {
+MineGraphics::XmaxButton::XmaxButton(int x, int y, int size, float scale, QWidget *parent) {
   m_x = x;
   m_y = y;
   m_size = size;
@@ -50,43 +50,43 @@ Mine::XmaxButton::XmaxButton(int x, int y, int size, float scale, QWidget *paren
   updateGeometry();
 }
 
-Mine::XmaxButton::~XmaxButton() {
+MineGraphics::XmaxButton::~XmaxButton() {
   delete m_borders;
   delete m_xmax;
   delete m_button;
 }
 
-void Mine::XmaxButton::setPosition(int x, int y) {
+void MineGraphics::XmaxButton::setPosition(int x, int y) {
   m_x = x;
   m_y = y;
   updateGeometry();
 }
 
-void Mine::XmaxButton::setSize(int size) {
+void MineGraphics::XmaxButton::setSize(int size) {
   m_size = size;
   updateGeometry();
 }
 
-void Mine::XmaxButton::setScale(float scale) {
+void MineGraphics::XmaxButton::setScale(float scale) {
   m_scale = scale;
   updateGeometry();
 }
 
-void Mine::XmaxButton::setButtonState(uint32_t buttonState) {
+void MineGraphics::XmaxButton::setButtonState(uint32_t buttonState) {
   if (buttonState >= 3) // 0 - Idle, 1 - Hover, 2 - Press
     return;
 
   m_button->setPixmap(ButtonPixmaps[buttonState]);
 }
 
-void Mine::XmaxButton::setXmaxState(uint32_t xmaxState) {
+void MineGraphics::XmaxButton::setXmaxState(uint32_t xmaxState) {
   if (xmaxState >= 5) // 0 - Idle, 1 - Hover, 2 - Press, 3 - Win, 4 - Lose
     return;
 
   m_xmax->setPixmap(XmaxPixmaps[xmaxState]);
 }
 
-void Mine::XmaxButton::updateGeometry(void) {
+void MineGraphics::XmaxButton::updateGeometry(void) {
   m_borders->setBorders(m_x, m_y, m_size, m_size, m_scale);
   m_button->setGeometry(
     int(m_x * m_scale),

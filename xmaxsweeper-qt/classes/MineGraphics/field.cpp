@@ -1,6 +1,6 @@
 #include "field.h"
 
-const char *Mine::Field::CellPixmapPaths[] = {
+const char *MineGraphics::Field::CellPixmapPaths[] = {
   ":/img/cell/masked.png",
   ":/img/cell/masked-hover.png",
   ":/img/cell/masked-press",
@@ -22,12 +22,12 @@ const char *Mine::Field::CellPixmapPaths[] = {
   ":/img/cell/8.png",
   ":/img/cell/bomb.png",
 };
-bool Mine::Field::CellPixmapsInitialized = false;
-QPixmap *Mine::Field::CellPixmaps = nullptr;
+bool MineGraphics::Field::CellPixmapsInitialized = false;
+QPixmap *MineGraphics::Field::CellPixmaps = nullptr;
 
-const uint32_t CellPixmapPathsLength = sizeof(Mine::Field::CellPixmapPaths) / sizeof(Mine::Field::CellPixmapPaths[0]);
+const uint32_t CellPixmapPathsLength = sizeof(MineGraphics::Field::CellPixmapPaths) / sizeof(MineGraphics::Field::CellPixmapPaths[0]);
 
-Mine::Field::Field(uint32_t countX, uint32_t countY, int x, int y, int size, float scale, QWidget *parent) {
+MineGraphics::Field::Field(uint32_t countX, uint32_t countY, int x, int y, int size, float scale, QWidget *parent) {
   m_countX = countX;
   m_countY = countY;
   m_x = x;
@@ -53,35 +53,35 @@ Mine::Field::Field(uint32_t countX, uint32_t countY, int x, int y, int size, flo
       setCell(rand() % CellPixmapPathsLength, x, y);
 }
 
-Mine::Field::~Field() {
+MineGraphics::Field::~Field() {
   delete m_borders;
   destroyField();
 }
 
-void Mine::Field::setPosition(int x, int y) {
+void MineGraphics::Field::setPosition(int x, int y) {
   m_x = x;
   m_y = y;
   updateGeometry();
 }
 
-void Mine::Field::setSize(int size) {
+void MineGraphics::Field::setSize(int size) {
   m_size = size;
   updateGeometry();
 }
 
-void Mine::Field::setScale(float scale) {
+void MineGraphics::Field::setScale(float scale) {
   m_scale = scale;
   updateGeometry();
 }
 
-void Mine::Field::setCounts(uint32_t countX, uint32_t countY) {
+void MineGraphics::Field::setCounts(uint32_t countX, uint32_t countY) {
   // Recreate array?
   destroyField();
   createField(countX, countY);
   updateGeometry();
 }
 
-void Mine::Field::setCell(uint32_t index, uint32_t x, uint32_t y) {
+void MineGraphics::Field::setCell(uint32_t index, uint32_t x, uint32_t y) {
   if (index >= CellPixmapPathsLength)
     return;
 
@@ -108,7 +108,7 @@ void Mine::Field::setCell(uint32_t index, uint32_t x, uint32_t y) {
   }
 }
 
-void Mine::Field::updateGeometry() {
+void MineGraphics::Field::updateGeometry() {
   m_borders->setBorders(m_x, m_y, m_size * m_countX, m_size * m_countY, m_scale);
   for (uint32_t y = 0, i = 0; y < m_countY; y++) {
     for (uint32_t x = 0; x < m_countX; x++, i++) {
@@ -121,7 +121,7 @@ void Mine::Field::updateGeometry() {
   }
 }
 
-void Mine::Field::createField(uint32_t countX, uint32_t countY) {
+void MineGraphics::Field::createField(uint32_t countX, uint32_t countY) {
   m_countX = countX;
   m_countY = countY;
 
@@ -139,7 +139,7 @@ void Mine::Field::createField(uint32_t countX, uint32_t countY) {
   }
 }
 
-void Mine::Field::destroyField() {
+void MineGraphics::Field::destroyField() {
   for (uint32_t i = 0; i < m_countX * m_countY; i++)
     delete m_field[i];
   delete [] m_field;

@@ -8,7 +8,7 @@
 #include "borders.h"
 #include "components/statebutton.h"
 
-namespace Mine {
+namespace MineGraphics {
   class XmaxButton {
     public:
       static bool PixmapsInitialized;
