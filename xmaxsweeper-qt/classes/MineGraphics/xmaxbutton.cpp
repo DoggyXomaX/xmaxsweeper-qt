@@ -37,7 +37,10 @@ MineGraphics::XmaxButton::XmaxButton(int x, int y, int size, float scale, QWidge
   m_button = new StateButton;
   m_button->setParent(parent);
   m_button->setScaledContents(true);
-  m_button->setStatePixmaps(&ButtonPixmaps[0], &ButtonPixmaps[1], &ButtonPixmaps[2]);
+  m_button->setStatePixmaps(
+    &ButtonPixmaps[(int)XmaxButtonType::Masked],
+    &ButtonPixmaps[(int)XmaxButtonType::MaskedHover],
+    &ButtonPixmaps[(int)XmaxButtonType::MaskedPressed]);
   m_button->show();
 
   m_xmax = new QLabel(m_button);
@@ -45,8 +48,8 @@ MineGraphics::XmaxButton::XmaxButton(int x, int y, int size, float scale, QWidge
   m_xmax->setStyleSheet("background-color: rgba(0, 0, 0, 0);");
   m_xmax->show();
 
-  setButtonState(0);
-  setXmaxState(0);
+  setButtonState(XmaxButtonType::Masked);
+  setXmaxState(XmaxType::Idle);
   updateGeometry();
 }
 
@@ -72,18 +75,12 @@ void MineGraphics::XmaxButton::setScale(float scale) {
   updateGeometry();
 }
 
-void MineGraphics::XmaxButton::setButtonState(uint32_t buttonState) {
-  if (buttonState >= 3) // 0 - Idle, 1 - Hover, 2 - Press
-    return;
-
-  m_button->setPixmap(ButtonPixmaps[buttonState]);
+void MineGraphics::XmaxButton::setButtonState(XmaxButtonType buttonState) {
+  m_button->setPixmap(ButtonPixmaps[(int)buttonState]);
 }
 
-void MineGraphics::XmaxButton::setXmaxState(uint32_t xmaxState) {
-  if (xmaxState >= 5) // 0 - Idle, 1 - Hover, 2 - Press, 3 - Win, 4 - Lose
-    return;
-
-  m_xmax->setPixmap(XmaxPixmaps[xmaxState]);
+void MineGraphics::XmaxButton::setXmaxState(XmaxType xmaxState) {
+  m_xmax->setPixmap(XmaxPixmaps[(int)xmaxState]);
 }
 
 void MineGraphics::XmaxButton::updateGeometry(void) {

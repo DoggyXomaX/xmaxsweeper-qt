@@ -10,7 +10,6 @@ const char *MineGraphics::Field::CellPixmapPaths[] = {
   ":/img/cell/question.png",
   ":/img/cell/question-hover.png",
   ":/img/cell/question-press.png",
-
   ":/img/cell/0.png",
   ":/img/cell/1.png",
   ":/img/cell/2.png",
@@ -50,7 +49,7 @@ MineGraphics::Field::Field(uint32_t countX, uint32_t countY, int x, int y, int s
   // Uncomment to test randomize
   for (uint32_t y = 0; y < 8; y++)
     for (uint32_t x = 0; x < 8; x++)
-      setCell(rand() % CellPixmapPathsLength, x, y);
+      setCell(FieldCellTypes(rand() % CellPixmapPathsLength), x, y);
 }
 
 MineGraphics::Field::~Field() {
@@ -81,29 +80,55 @@ void MineGraphics::Field::setCounts(uint32_t countX, uint32_t countY) {
   updateGeometry();
 }
 
-void MineGraphics::Field::setCell(uint32_t index, uint32_t x, uint32_t y) {
-  if (index >= CellPixmapPathsLength)
-    return;
-
+void MineGraphics::Field::setCell(FieldCellTypes index, uint32_t x, uint32_t y) {
   if (x >= m_countX || y >= m_countY)
     return;
 
   uint32_t i = y * m_countX + x;
   m_fieldIndexes[i] = index;
 
-  uint32_t offset = index <= 2 ? 0 : index <= 5 ? 3 : index <= 8 ? 6 : 0;
   switch (index) {
-    case 0: case 1: case 2:
-    case 3: case 4: case 5:
-    case 6: case 7: case 8:
+    case FieldCellTypes::Masked:
+    case FieldCellTypes::MaskedHover:
+    case FieldCellTypes::MaskedPressed:
+    case FieldCellTypes::Flagged:
+    case FieldCellTypes::FlaggedHover:
+    case FieldCellTypes::FlaggedPressed:
+    case FieldCellTypes::Question:
+    case FieldCellTypes::QuestionHover:
+    case FieldCellTypes::QuestionPressed: {
+      uint32_t offset = uint32_t(
+        (FieldCellTypes)index < FieldCellTypes::Flagged ? FieldCellTypes::Masked :
+        (FieldCellTypes)index < FieldCellTypes::Question ? FieldCellTypes::Flagged :
+        FieldCellTypes::Question);
       m_field[i]->setStatePixmaps(
         &CellPixmaps[offset],
         &CellPixmaps[offset + 1],
         &CellPixmaps[offset + 2]);
       break;
-    default:
+    }
+
+    default: {
       m_field[i]->setStatePixmaps(nullptr, nullptr, nullptr);
-      m_field[i]->setPixmap(CellPixmaps[index]);
+      m_field[i]->setPixmap(CellPixmaps[(uint32_t)index]);
+      break;
+    }
+  }
+}
+
+void MineGraphics::Field::setCell(MineCore::Cell_u cell, uint32_t x, uint32_t y) {
+  switch (cell.s.flag) {
+    case MineCore::CellFlagType::Masked:
+      setCell(FieldCellTypes::Masked, x, y);
+      break;
+    case MineCore::CellFlagType::Flagged:
+      setCell(FieldCellTypes::Flagged, x, y);
+      break;
+    case MineCore::CellFlagType::Question:
+      setCell(FieldCellTypes::Question, x, y);
+      break;
+    default:
+      setCell(FieldCellTypes((uint32_t)FieldCellTypes::Value0 + (uint32_t)cell.s.value), x, y);
       break;
   }
 }
@@ -127,15 +152,18 @@ void MineGraphics::Field::createField(uint32_t countX, uint32_t countY) {
 
   const uint32_t length = m_countX * m_countY;
   m_field = new StateButton*[length];
-  m_fieldIndexes = new uint32_t[length];
+  m_fieldIndexes = new FieldCellTypes[length];
   for (uint32_t i = 0; i < length; i++) {
     m_field[i] = new StateButton;
     m_field[i]->setParent(m_parent);
     m_field[i]->setScaledContents(true);
-    m_field[i]->setStatePixmaps(&CellPixmaps[0], &CellPixmaps[1], &CellPixmaps[2]);
+    m_field[i]->setStatePixmaps(
+      &CellPixmaps[(uint32_t)FieldCellTypes::Masked],
+      &CellPixmaps[(uint32_t)FieldCellTypes::MaskedHover],
+      &CellPixmaps[(uint32_t)FieldCellTypes::MaskedPressed]);
     m_field[i]->show();
 
-    m_fieldIndexes[i] = 0;
+    m_fieldIndexes[i] = FieldCellTypes::Masked;
   }
 }
 

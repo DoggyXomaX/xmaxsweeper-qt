@@ -8,6 +8,19 @@
 #include "borders.h"
 
 namespace MineGraphics {
+  enum class DigitType {
+    Value0 = 0,
+    Value1,
+    Value2,
+    Value3,
+    Value4,
+    Value5,
+    Value6,
+    Value7,
+    Value8,
+    Value9,
+  };
+
   class Timer {
     public:
       static const uint32_t DigitWidth;

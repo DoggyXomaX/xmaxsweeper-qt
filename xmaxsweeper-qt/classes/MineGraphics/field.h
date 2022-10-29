@@ -9,8 +9,31 @@
 
 #include "borders.h"
 #include "components/statebutton.h"
+#include "classes/MineCore/cell.h"
 
 namespace MineGraphics {
+  enum class FieldCellTypes {
+    Masked = 0,
+    MaskedHover,
+    MaskedPressed,
+    Flagged,
+    FlaggedHover,
+    FlaggedPressed,
+    Question,
+    QuestionHover,
+    QuestionPressed,
+    Value0,
+    Value1,
+    Value2,
+    Value3,
+    Value4,
+    Value5,
+    Value6,
+    Value7,
+    Value8,
+    ValueBomb,
+  };
+
   class Field {
     public:
       static const char *CellPixmapPaths[];
@@ -24,7 +47,8 @@ namespace MineGraphics {
       void setSize(int size);
       void setScale(float scale);
       void setCounts(uint32_t countX, uint32_t countY);
-      void setCell(uint32_t index, uint32_t x, uint32_t y);
+      void setCell(FieldCellTypes index, uint32_t x, uint32_t y);
+      void setCell(MineCore::Cell_u cell, uint32_t x, uint32_t y);
 
     private:
       void updateGeometry(void);
@@ -36,7 +60,7 @@ namespace MineGraphics {
       StateButton **m_field;
       uint32_t m_countX, m_countY;
 
-      uint32_t *m_fieldIndexes;
+      FieldCellTypes *m_fieldIndexes;
 
       int m_x, m_y;
       int m_size;

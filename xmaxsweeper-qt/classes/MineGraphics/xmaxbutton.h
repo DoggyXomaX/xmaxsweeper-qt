@@ -9,6 +9,20 @@
 #include "components/statebutton.h"
 
 namespace MineGraphics {
+  enum class XmaxButtonType {
+    Masked = 0,
+    MaskedHover,
+    MaskedPressed,
+  };
+
+  enum class XmaxType {
+    Idle = 0,
+    Hover,
+    Pressed,
+    Win,
+    Lose,
+  };
+
   class XmaxButton {
     public:
       static bool PixmapsInitialized;
@@ -22,8 +36,8 @@ namespace MineGraphics {
       void setPosition(int x, int y);
       void setSize(int size);
       void setScale(float scale);
-      void setButtonState(uint32_t buttonState);
-      void setXmaxState(uint32_t xmaxState);
+      void setButtonState(XmaxButtonType buttonState);
+      void setXmaxState(XmaxType xmaxState);
 
     private:
       void updateGeometry(void);
