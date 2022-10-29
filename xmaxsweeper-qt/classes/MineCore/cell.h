@@ -4,14 +4,14 @@
 #include <cinttypes>
 
 namespace MineCore {
-  enum class CellFlagType {
+  enum class CellFlagType : uint32_t {
     Open = 0,
     Masked,
     Flagged,
     Question,
   };
 
-  enum class CellValueType {
+  enum class CellValueType : uint32_t {
     Value0 = 0,
     Value1,
     Value2,

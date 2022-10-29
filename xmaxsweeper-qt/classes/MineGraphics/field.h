@@ -12,7 +12,7 @@
 #include "classes/MineCore/cell.h"
 
 namespace MineGraphics {
-  enum class FieldCellTypes {
+  enum class FieldCellTypes : uint32_t {
     Masked = 0,
     MaskedHover,
     MaskedPressed,

@@ -6,17 +6,6 @@
 #include <QPixmap>
 
 namespace MineGraphics {
-  enum class BordersTypes {
-    LeftTop = 0,
-    Top,
-    RightTop,
-    Left,
-    Right,
-    LeftBottom,
-    Bottom,
-    RightBottom,
-  };
-
   class Borders {
     public:
       static const char *MineBorderPaths[];

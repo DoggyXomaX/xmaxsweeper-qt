@@ -9,13 +9,13 @@
 #include "components/statebutton.h"
 
 namespace MineGraphics {
-  enum class XmaxButtonType {
+  enum class XmaxButtonType : uint32_t {
     Masked = 0,
     MaskedHover,
     MaskedPressed,
   };
 
-  enum class XmaxType {
+  enum class XmaxType : uint32_t {
     Idle = 0,
     Hover,
     Pressed,
