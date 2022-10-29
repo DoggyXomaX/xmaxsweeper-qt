@@ -26,5 +26,21 @@
         <file>img/mouse/lose.png</file>
         <file>img/mouse/press.png</file>
         <file>img/mouse/win.png</file>
+        <file>img/cell/0.png</file>
+        <file>img/cell/1.png</file>
+        <file>img/cell/2.png</file>
+        <file>img/cell/3.png</file>
+        <file>img/cell/4.png</file>
+        <file>img/cell/5.png</file>
+        <file>img/cell/6.png</file>
+        <file>img/cell/7.png</file>
+        <file>img/cell/8.png</file>
+        <file>img/cell/bomb.png</file>
+        <file>img/cell/flag.png</file>
+        <file>img/cell/question.png</file>
+        <file>img/cell/flag-hover.png</file>
+        <file>img/cell/flag-press.png</file>
+        <file>img/cell/question-hover.png</file>
+        <file>img/cell/question-press.png</file>
     </qresource>
 </RCC>
