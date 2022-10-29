@@ -1,4 +1,4 @@
-#include "mineborders.h"
+#include "borders.h"
 
 const char *Mine::Borders::MineBorderPaths[] = {
   ":/img/border/left-top.png",

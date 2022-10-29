@@ -1,4 +1,4 @@
-#include "minetimer.h"
+#include "timer.h"
 
 const uint32_t Mine::Timer::DigitWidth = 5;
 const uint32_t Mine::Timer::DigitHeight = 10;

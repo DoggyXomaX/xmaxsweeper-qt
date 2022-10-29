@@ -1,4 +1,4 @@
-#include "minefield.h"
+#include "field.h"
 
 const char *Mine::Field::CellPixmapPaths[] = {
   ":/img/cell/masked.png",

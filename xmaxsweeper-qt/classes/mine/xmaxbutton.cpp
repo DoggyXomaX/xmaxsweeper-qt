@@ -1,4 +1,4 @@
-#include "minexmaxbutton.h"
+#include "xmaxbutton.h"
 
 bool Mine::XmaxButton::PixmapsInitialized = false;
 const char *Mine::XmaxButton::ButtonPixmapsPaths[] = {
