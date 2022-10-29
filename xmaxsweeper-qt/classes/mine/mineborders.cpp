@@ -11,7 +11,7 @@ const char *MineBorderPaths[] = {
   ":/img/border/right-bottom.png",
 };
 
-MineBorders::MineBorders(int x, int y, int width, int height, float scale, QWidget *parent) {
+Mine::Borders::Borders(int x, int y, int width, int height, float scale, QWidget *parent) {
   m_borders = new QLabel*[8];
   for (int i = 0; i < 8; i++) {
     QPixmap pixmap(MineBorderPaths[i]);
@@ -27,30 +27,30 @@ MineBorders::MineBorders(int x, int y, int width, int height, float scale, QWidg
   setBorders(x, y, width, height, scale);
 }
 
-MineBorders::~MineBorders() {
+Mine::Borders::~Borders() {
   for (int i = 0; i < 8; i++)
     delete m_borders[i];
   delete [] m_borders;
 }
 
-void MineBorders::setPosition(int x, int y) {
+void Mine::Borders::setPosition(int x, int y) {
   m_x = x;
   m_y = y;
   updateGeometry();
 }
 
-void MineBorders::setSize(int width, int height) {
+void Mine::Borders::setSize(int width, int height) {
   m_width = width;
   m_height = height;
   updateGeometry();
 }
 
-void MineBorders::setScale(float scale) {
+void Mine::Borders::setScale(float scale) {
   m_scale = scale;
   updateGeometry();
 }
 
-void MineBorders::setBorders(int x, int y, int width, int height, float scale) {
+void Mine::Borders::setBorders(int x, int y, int width, int height, float scale) {
   m_x = x;
   m_y = y;
   m_width = width;
@@ -59,7 +59,7 @@ void MineBorders::setBorders(int x, int y, int width, int height, float scale) {
   updateGeometry();
 }
 
-void MineBorders::updateGeometry() {
+void Mine::Borders::updateGeometry() {
   int sizes[] = {
     int(2 * m_scale),
     int(m_width * m_scale),

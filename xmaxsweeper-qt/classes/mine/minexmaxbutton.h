@@ -8,33 +8,35 @@
 #include "mineborders.h"
 #include "components/minebutton.h"
 
-class MineXmaxButton {
-  public:
-    static bool PixmapsInitialized;
-    static const char *ButtonPixmapsPaths[];
-    static QPixmap *ButtonPixmaps;
-    static const char *XmaxPixmapsPaths[];
-    static QPixmap *XmaxPixmaps;
+namespace Mine {
+  class XmaxButton {
+    public:
+      static bool PixmapsInitialized;
+      static const char *ButtonPixmapsPaths[];
+      static QPixmap *ButtonPixmaps;
+      static const char *XmaxPixmapsPaths[];
+      static QPixmap *XmaxPixmaps;
 
-    MineXmaxButton(int x, int y, int size, float scale, QWidget *parent);
-    ~MineXmaxButton();
-    void setPosition(int x, int y);
-    void setSize(int size);
-    void setScale(float scale);
-    void setButtonState(uint32_t buttonState);
-    void setXmaxState(uint32_t xmaxState);
+      XmaxButton(int x, int y, int size, float scale, QWidget *parent);
+      ~XmaxButton();
+      void setPosition(int x, int y);
+      void setSize(int size);
+      void setScale(float scale);
+      void setButtonState(uint32_t buttonState);
+      void setXmaxState(uint32_t xmaxState);
 
-  private:
-    void updateGeometry(void);
+    private:
+      void updateGeometry(void);
 
-    QPixmap *m_buttonPixmaps;
-    QPixmap *m_xmaxPixmaps;
+      QPixmap *m_buttonPixmaps;
+      QPixmap *m_xmaxPixmaps;
 
-    MineBorders *m_borders;
-    MineButton *m_button;
-    QLabel *m_xmax;
-    int m_x, m_y, m_size;
-    float m_scale;
-};
+      Borders *m_borders;
+      MineButton *m_button;
+      QLabel *m_xmax;
+      int m_x, m_y, m_size;
+      float m_scale;
+  };
+}
 
 #endif // __MINEXMAXBUTTON_H__

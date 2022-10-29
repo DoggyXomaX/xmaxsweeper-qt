@@ -1,6 +1,6 @@
 #include "minefield.h"
 
-const char *MineField::CellPixmapPaths[] = {
+const char *Mine::Field::CellPixmapPaths[] = {
   ":/img/cell/masked.png",
   ":/img/cell/masked-hover.png",
   ":/img/cell/masked-press",
@@ -22,12 +22,12 @@ const char *MineField::CellPixmapPaths[] = {
   ":/img/cell/8.png",
   ":/img/cell/bomb.png",
 };
-bool MineField::CellPixmapsInitialized = false;
-QPixmap *MineField::CellPixmaps = nullptr;
+bool Mine::Field::CellPixmapsInitialized = false;
+QPixmap *Mine::Field::CellPixmaps = nullptr;
 
-const uint32_t CellPixmapPathsLength = sizeof(MineField::CellPixmapPaths) / sizeof(MineField::CellPixmapPaths[0]);
+const uint32_t CellPixmapPathsLength = sizeof(Mine::Field::CellPixmapPaths) / sizeof(Mine::Field::CellPixmapPaths[0]);
 
-MineField::MineField(uint32_t countX, uint32_t countY, int x, int y, int size, float scale, QWidget *parent) {
+Mine::Field::Field(uint32_t countX, uint32_t countY, int x, int y, int size, float scale, QWidget *parent) {
   m_countX = countX;
   m_countY = countY;
   m_x = x;
@@ -36,52 +36,52 @@ MineField::MineField(uint32_t countX, uint32_t countY, int x, int y, int size, f
   m_scale = scale;
   m_parent = parent;
 
-  if (!MineField::CellPixmapsInitialized) {
-    MineField::CellPixmapsInitialized = true;
-    MineField::CellPixmaps = new QPixmap[CellPixmapPathsLength];
+  if (!CellPixmapsInitialized) {
+    CellPixmapsInitialized = true;
+    CellPixmaps = new QPixmap[CellPixmapPathsLength];
     for (uint32_t i = 0; i < CellPixmapPathsLength; i++)
-      MineField::CellPixmaps[i] = QPixmap(MineField::CellPixmapPaths[i]);
+      CellPixmaps[i] = QPixmap(CellPixmapPaths[i]);
   }
 
-  m_borders = new MineBorders(x, y, size, size, scale, parent);
+  m_borders = new Borders(x, y, size, size, scale, parent);
   createField(countX, countY);
   updateGeometry();
 
   // Uncomment to test randomize
   for (uint32_t y = 0; y < 8; y++)
     for (uint32_t x = 0; x < 8; x++)
-      setCell(rand() % 10, x, y);
+      setCell(rand() % CellPixmapPathsLength, x, y);
 }
 
-MineField::~MineField() {
+Mine::Field::~Field() {
   delete m_borders;
   destroyField();
 }
 
-void MineField::setPosition(int x, int y) {
+void Mine::Field::setPosition(int x, int y) {
   m_x = x;
   m_y = y;
   updateGeometry();
 }
 
-void MineField::setSize(int size) {
+void Mine::Field::setSize(int size) {
   m_size = size;
   updateGeometry();
 }
 
-void MineField::setScale(float scale) {
+void Mine::Field::setScale(float scale) {
   m_scale = scale;
   updateGeometry();
 }
 
-void MineField::setCounts(uint32_t countX, uint32_t countY) {
+void Mine::Field::setCounts(uint32_t countX, uint32_t countY) {
   // Recreate array?
   destroyField();
   createField(countX, countY);
   updateGeometry();
 }
 
-void MineField::setCell(uint32_t index, uint32_t x, uint32_t y) {
+void Mine::Field::setCell(uint32_t index, uint32_t x, uint32_t y) {
   if (index >= CellPixmapPathsLength)
     return;
 
@@ -97,18 +97,18 @@ void MineField::setCell(uint32_t index, uint32_t x, uint32_t y) {
     case 3: case 4: case 5:
     case 6: case 7: case 8:
       m_field[i]->setStatePixmaps(
-        &MineField::CellPixmaps[offset],
-        &MineField::CellPixmaps[offset + 1],
-        &MineField::CellPixmaps[offset + 2]);
+        &CellPixmaps[offset],
+        &CellPixmaps[offset + 1],
+        &CellPixmaps[offset + 2]);
       break;
     default:
       m_field[i]->setStatePixmaps(nullptr, nullptr, nullptr);
-      m_field[i]->setPixmap(MineField::CellPixmaps[index]);
+      m_field[i]->setPixmap(CellPixmaps[index]);
       break;
   }
 }
 
-void MineField::updateGeometry() {
+void Mine::Field::updateGeometry() {
   m_borders->setBorders(m_x, m_y, m_size * m_countX, m_size * m_countY, m_scale);
   for (uint32_t y = 0, i = 0; y < m_countY; y++) {
     for (uint32_t x = 0; x < m_countX; x++, i++) {
@@ -121,7 +121,7 @@ void MineField::updateGeometry() {
   }
 }
 
-void MineField::createField(uint32_t countX, uint32_t countY) {
+void Mine::Field::createField(uint32_t countX, uint32_t countY) {
   m_countX = countX;
   m_countY = countY;
 
@@ -132,14 +132,14 @@ void MineField::createField(uint32_t countX, uint32_t countY) {
     m_field[i] = new MineButton;
     m_field[i]->setParent(m_parent);
     m_field[i]->setScaledContents(true);
-    m_field[i]->setStatePixmaps(&MineField::CellPixmaps[0], &MineField::CellPixmaps[1], &MineField::CellPixmaps[2]);
+    m_field[i]->setStatePixmaps(&CellPixmaps[0], &CellPixmaps[1], &CellPixmaps[2]);
     m_field[i]->show();
 
     m_fieldIndexes[i] = 0;
   }
 }
 
-void MineField::destroyField() {
+void Mine::Field::destroyField() {
   for (uint32_t i = 0; i < m_countX * m_countY; i++)
     delete m_field[i];
   delete [] m_field;

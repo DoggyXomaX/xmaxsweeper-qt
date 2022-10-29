@@ -1,12 +1,14 @@
 #ifndef __MINECELL_H__
 #define __MINECELL_H__
 
-union MineCell_u {
-  struct MineCell_s {
-    unsigned char value : 5;
-    unsigned char flag : 2;
+namespace Mine {
+  union Cell_u {
+    struct Cell_s {
+      unsigned char value : 5;
+      unsigned char flag : 2;
+    };
+    unsigned char raw;
   };
-  unsigned char raw;
-};
+}
 
 #endif // __MINECELL_H__

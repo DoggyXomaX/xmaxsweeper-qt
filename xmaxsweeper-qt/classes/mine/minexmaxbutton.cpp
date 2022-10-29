@@ -1,43 +1,43 @@
 #include "minexmaxbutton.h"
 
-bool MineXmaxButton::PixmapsInitialized = false;
-const char *MineXmaxButton::ButtonPixmapsPaths[] = {
+bool Mine::XmaxButton::PixmapsInitialized = false;
+const char *Mine::XmaxButton::ButtonPixmapsPaths[] = {
   ":/img/cell/masked.png",
   ":/img/cell/masked-hover.png",
   ":/img/cell/masked-press.png",
 };
-QPixmap *MineXmaxButton::ButtonPixmaps = nullptr;
-const char *MineXmaxButton::XmaxPixmapsPaths[] = {
+QPixmap *Mine::XmaxButton::ButtonPixmaps = nullptr;
+const char *Mine::XmaxButton::XmaxPixmapsPaths[] = {
   ":/img/mouse/idle.png",
   ":/img/mouse/hover.png",
   ":/img/mouse/press.png",
   ":/img/mouse/win.png",
   ":/img/mouse/lose.png",
 };
-QPixmap *MineXmaxButton::XmaxPixmaps = nullptr;
+QPixmap *Mine::XmaxButton::XmaxPixmaps = nullptr;
 
-MineXmaxButton::MineXmaxButton(int x, int y, int size, float scale, QWidget *parent) {
+Mine::XmaxButton::XmaxButton(int x, int y, int size, float scale, QWidget *parent) {
   m_x = x;
   m_y = y;
   m_size = size;
   m_scale = scale;
 
-  m_borders = new MineBorders(m_x, m_y, m_size, m_size, m_scale, parent);
+  m_borders = new Borders(m_x, m_y, m_size, m_size, m_scale, parent);
 
-  if (!MineXmaxButton::PixmapsInitialized) {
-    MineXmaxButton::PixmapsInitialized = true;
-    MineXmaxButton::ButtonPixmaps = new QPixmap[3];
+  if (!PixmapsInitialized) {
+    PixmapsInitialized = true;
+    ButtonPixmaps = new QPixmap[3];
     for (int i = 0; i < 3; i++)
-      MineXmaxButton::ButtonPixmaps[i] = QPixmap(MineXmaxButton::ButtonPixmapsPaths[i]);
-    MineXmaxButton::XmaxPixmaps = new QPixmap[5];
+      ButtonPixmaps[i] = QPixmap(ButtonPixmapsPaths[i]);
+    XmaxPixmaps = new QPixmap[5];
     for (int i = 0; i < 5; i++)
-      MineXmaxButton::XmaxPixmaps[i] = QPixmap(MineXmaxButton::XmaxPixmapsPaths[i]);
+      XmaxPixmaps[i] = QPixmap(XmaxPixmapsPaths[i]);
   }
 
   m_button = new MineButton;
   m_button->setParent(parent);
   m_button->setScaledContents(true);
-  m_button->setStatePixmaps(&MineXmaxButton::ButtonPixmaps[0], &MineXmaxButton::ButtonPixmaps[1], &MineXmaxButton::ButtonPixmaps[2]);
+  m_button->setStatePixmaps(&ButtonPixmaps[0], &ButtonPixmaps[1], &ButtonPixmaps[2]);
   m_button->show();
 
   m_xmax = new QLabel(m_button);
@@ -50,43 +50,43 @@ MineXmaxButton::MineXmaxButton(int x, int y, int size, float scale, QWidget *par
   updateGeometry();
 }
 
-MineXmaxButton::~MineXmaxButton() {
+Mine::XmaxButton::~XmaxButton() {
   delete m_borders;
   delete m_xmax;
   delete m_button;
 }
 
-void MineXmaxButton::setPosition(int x, int y) {
+void Mine::XmaxButton::setPosition(int x, int y) {
   m_x = x;
   m_y = y;
   updateGeometry();
 }
 
-void MineXmaxButton::setSize(int size) {
+void Mine::XmaxButton::setSize(int size) {
   m_size = size;
   updateGeometry();
 }
 
-void MineXmaxButton::setScale(float scale) {
+void Mine::XmaxButton::setScale(float scale) {
   m_scale = scale;
   updateGeometry();
 }
 
-void MineXmaxButton::setButtonState(uint32_t buttonState) {
+void Mine::XmaxButton::setButtonState(uint32_t buttonState) {
   if (buttonState >= 3) // 0 - Idle, 1 - Hover, 2 - Press
     return;
 
-  m_button->setPixmap(MineXmaxButton::ButtonPixmaps[buttonState]);
+  m_button->setPixmap(ButtonPixmaps[buttonState]);
 }
 
-void MineXmaxButton::setXmaxState(uint32_t xmaxState) {
+void Mine::XmaxButton::setXmaxState(uint32_t xmaxState) {
   if (xmaxState >= 5) // 0 - Idle, 1 - Hover, 2 - Press, 3 - Win, 4 - Lose
     return;
 
-  m_xmax->setPixmap(MineXmaxButton::XmaxPixmaps[xmaxState]);
+  m_xmax->setPixmap(XmaxPixmaps[xmaxState]);
 }
 
-void MineXmaxButton::updateGeometry(void) {
+void Mine::XmaxButton::updateGeometry(void) {
   m_borders->setBorders(m_x, m_y, m_size, m_size, m_scale);
   m_button->setGeometry(
     int(m_x * m_scale),

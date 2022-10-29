@@ -19,10 +19,10 @@ class XmaxWindow : public QWidget {
     float getScale(void);
   private:
     float m_aspectScale;
-    MineTimer *m_leftTimer;
-    MineTimer *m_rightTimer;
-    MineXmaxButton *m_xmaxButton;
-    MineField *m_field;
+    Mine::Timer *m_leftTimer;
+    Mine::Timer *m_rightTimer;
+    Mine::XmaxButton *m_xmaxButton;
+    Mine::Field *m_field;
 };
 
 #endif // __QT_XMAXWINDOW_H__

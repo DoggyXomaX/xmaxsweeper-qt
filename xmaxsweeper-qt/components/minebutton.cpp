@@ -1,6 +1,7 @@
 #include "minebutton.h"
 
 MineButton::MineButton(QWidget *parent, Qt::WindowFlags f) : QLabel(parent) {
+  Q_UNUSED(f);
   this->setAttribute(Qt::WA_Hover, true);
   m_normal = nullptr;
   m_hover = nullptr;
