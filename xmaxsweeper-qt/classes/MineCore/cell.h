@@ -4,7 +4,7 @@
 #include <cinttypes>
 
 namespace MineCore {
-  enum class CellFlagType : uint32_t {
+  enum class CellMaskType : uint32_t {
     Open = 0,
     Masked,
     Flagged,
@@ -26,7 +26,7 @@ namespace MineCore {
 
   typedef struct Cell_s {
     CellValueType value : 4;
-    CellFlagType flag : 2;
+    CellMaskType mask : 2;
   } Cell_t;
 
   union Cell_u {

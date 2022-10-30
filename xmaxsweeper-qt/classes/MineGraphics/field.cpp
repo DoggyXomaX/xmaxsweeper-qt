@@ -117,14 +117,14 @@ void MineGraphics::Field::setCell(FieldCellTypes index, uint32_t x, uint32_t y) 
 }
 
 void MineGraphics::Field::setCell(MineCore::Cell_u cell, uint32_t x, uint32_t y) {
-  switch (cell.s.flag) {
-    case MineCore::CellFlagType::Masked:
+  switch (cell.s.mask) {
+    case MineCore::CellMaskType::Masked:
       setCell(FieldCellTypes::Masked, x, y);
       break;
-    case MineCore::CellFlagType::Flagged:
+    case MineCore::CellMaskType::Flagged:
       setCell(FieldCellTypes::Flagged, x, y);
       break;
-    case MineCore::CellFlagType::Question:
+    case MineCore::CellMaskType::Question:
       setCell(FieldCellTypes::Question, x, y);
       break;
     default:

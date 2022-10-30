@@ -2,6 +2,9 @@
 #define __MANAGER_H__
 
 #include <cinttypes>
+#include <cstdlib>
+#include <ctime>
+#include <vector>
 #include "cell.h"
 
 namespace MineCore {
@@ -9,8 +12,11 @@ namespace MineCore {
     public:
       Manager(uint32_t width, uint32_t height);
       ~Manager();
+      void generateBombs(uint32_t bombCount);
 
     private:
+      void fillValue(CellValueType valueType);
+      void fillMask(CellMaskType maskType);
       void initField();
 
       Cell_u *m_field;
