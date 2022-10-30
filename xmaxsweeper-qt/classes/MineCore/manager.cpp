@@ -5,6 +5,8 @@ MineCore::Manager::Manager(uint32_t width, uint32_t height) {
   m_height = height;
 
   initField();
+
+  test();
 }
 
 MineCore::Manager::~Manager() {
@@ -85,4 +87,25 @@ void MineCore::Manager::fillMask(MineCore::CellMaskType maskType) {
   uint32_t length = m_width * m_height;
   for (uint32_t i = 0; i < length; i++)
     m_field[i].s.mask = maskType;
+}
+
+void MineCore::Manager::test() {
+  print();
+  generateBombs(16);
+  print();
+}
+
+void MineCore::Manager::print() {
+  QString outputInfo("");
+  for (uint32_t y = 0, i = 0; y < m_height; y++) {
+    if (y)
+      outputInfo += "\n";
+    for (uint32_t x = 0; x < m_width; x++, i++) {
+      if (x)
+        outputInfo += "\t";
+      outputInfo += QString::asprintf("%u|%u", m_field[i].s.mask, m_field[i].s.value);
+    }
+  }
+
+  qDebug() << outputInfo;
 }

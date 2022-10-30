@@ -47,13 +47,17 @@ MineGraphics::Field::Field(uint32_t countX, uint32_t countY, int x, int y, int s
   updateGeometry();
 
   // Uncomment to test randomize
+  srand(time(nullptr));
   for (uint32_t y = 0; y < 8; y++)
     for (uint32_t x = 0; x < 8; x++)
       setCell(FieldCellTypes(rand() % CellPixmapPathsLength), x, y);
+
+  m_manager = new MineCore::Manager(m_countX, m_countY);
 }
 
 MineGraphics::Field::~Field() {
   delete m_borders;
+  delete m_manager;
   destroyField();
 }
 

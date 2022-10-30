@@ -8,6 +8,9 @@
 #include <vector>
 #include "cell.h"
 
+#include <QDebug>
+#include <QString>
+
 namespace MineCore {
   class Manager {
     public:
@@ -21,6 +24,10 @@ namespace MineCore {
       void fillValue(CellValueType valueType);
       void fillMask(CellMaskType maskType);
       void initField(void);
+
+      // Test
+      void test(void);
+      void print(void);
 
       Cell_u *m_field;
       uint32_t m_width;

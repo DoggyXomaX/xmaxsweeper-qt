@@ -10,6 +10,7 @@
 #include "borders.h"
 #include "components/statebutton.h"
 #include "classes/MineCore/cell.h"
+#include "classes/MineCore/manager.h"
 
 namespace MineGraphics {
   enum class FieldCellTypes : uint32_t {
@@ -60,6 +61,7 @@ namespace MineGraphics {
       StateButton **m_field;
       uint32_t m_countX, m_countY;
 
+      MineCore::Manager *m_manager;
       FieldCellTypes *m_fieldIndexes;
 
       int m_x, m_y;
