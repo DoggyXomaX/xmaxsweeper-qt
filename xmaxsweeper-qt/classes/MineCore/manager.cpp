@@ -19,8 +19,10 @@ void MineCore::Manager::generateBombs(uint32_t bombCount) {
     bombCount = 1;
 
   std::vector<uint32_t> indexes(length);
-  for (uint32_t i = 0; i < length; i++)
+  for (uint32_t i = 0; i < length; i++) {
+    m_field[i].raw = 0x10; // Clear field
     indexes[i] = i;
+  }
 
   srand(time(nullptr));
   for (uint32_t i = 0; i < bombCount; i++) {
@@ -29,6 +31,41 @@ void MineCore::Manager::generateBombs(uint32_t bombCount) {
     indexes.erase(indexes.begin() + r);
     m_field[index].s.value = CellValueType::Bomb;
   }
+}
+
+// unsafe index
+void MineCore::Manager::calculateCell(uint32_t index) {
+  if (m_field[index].s.value == CellValueType::Bomb)
+    return;
+
+  uint32_t x = index % m_width;
+  uint32_t y = index / m_height;
+  uint32_t bombCount = 0;
+  for (int dy = -1; dy <= 1; dy++)
+  for (int dx = -1; dx <= 1; dx++) {
+    if (!dx && !dy)
+      continue;
+
+    int tx = int(x) + dx;
+    if (tx < 0 || tx >= int(m_width))
+      continue;
+
+    int ty = int(y) + dy;
+    if (ty < 0 || ty >= int(m_height))
+      continue;
+
+    uint32_t ti = uint32_t(ty) * m_width + uint32_t(tx);
+    if (m_field[ti].s.value == CellValueType::Bomb)
+      bombCount++;
+  }
+  m_field[index].s.value = CellValueType(bombCount);
+}
+
+void MineCore::Manager::calculateBombs() {
+  uint32_t length = m_width * m_height;
+//  const auto processorCount = std::thread::hardware_concurrency();
+  for (uint32_t i = 0; i < length; i++)
+    calculateCell(i);
 }
 
 void MineCore::Manager::initField() {

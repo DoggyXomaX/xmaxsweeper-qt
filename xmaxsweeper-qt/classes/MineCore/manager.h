@@ -4,6 +4,7 @@
 #include <cinttypes>
 #include <cstdlib>
 #include <ctime>
+#include <thread>
 #include <vector>
 #include "cell.h"
 
@@ -15,9 +16,11 @@ namespace MineCore {
       void generateBombs(uint32_t bombCount);
 
     private:
+      void calculateCell(uint32_t index);
+      void calculateBombs(void);
       void fillValue(CellValueType valueType);
       void fillMask(CellMaskType maskType);
-      void initField();
+      void initField(void);
 
       Cell_u *m_field;
       uint32_t m_width;
