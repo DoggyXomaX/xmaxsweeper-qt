@@ -4,6 +4,7 @@ MineCore::Manager::Manager(uint32_t width, uint32_t height) {
   m_width = width;
   m_height = height;
   m_maskCount = 0;
+  m_flagCount = 0;
   m_win = false;
   m_lose = false;
 
@@ -22,6 +23,7 @@ void MineCore::Manager::generateBombs(uint32_t bombCount) {
     bombCount = 1;
 
   m_bombCount = bombCount;
+  m_flagCount = 0;
   m_maskCount = length;
 
   std::vector<uint32_t> indexes(length);
@@ -166,9 +168,11 @@ void MineCore::Manager::flagCell(uint32_t x, uint32_t y) {
   switch (m_field[i].s.mask) {
     case CellMaskType::Masked:
       m_field[i].s.mask = CellMaskType::Flagged;
+      m_flagCount++;
       break;
     case CellMaskType::Flagged:
       m_field[i].s.mask = CellMaskType::Question;
+      m_flagCount--;
       break;
     case CellMaskType::Question:
       m_field[i].s.mask = CellMaskType::Masked;
@@ -182,11 +186,19 @@ const MineCore::Cell_u *MineCore::Manager::getField() {
   return (const Cell_u*)m_field;
 }
 
-uint32_t MineCore::Manager::getWin() {
+uint32_t MineCore::Manager::getBombCount() {
+  return m_bombCount;
+}
+
+uint32_t MineCore::Manager::getFlagCount() {
+  return m_flagCount;
+}
+
+bool MineCore::Manager::getWin() {
   return m_win;
 }
 
-uint32_t MineCore::Manager::getLose() {
+bool MineCore::Manager::getLose() {
   return m_lose;
 }
 

@@ -5,7 +5,10 @@ void fieldResetCallback(uint32_t x, uint32_t y, void *p) {
   Q_UNUSED(y)
   qDebug() << "Reset";
 
-  auto fp = (MineGraphics::Field*)p;
+  auto wp = (XmaxWindow *)p;
+  wp->setTime(0);
+
+  auto fp = wp->getField();
   auto xmaxButton = fp->getXmaxButton();
   xmaxButton->setXmaxState(MineGraphics::XmaxType::Idle);
 
@@ -33,9 +36,16 @@ XmaxWindow::XmaxWindow(QWidget *parent) : QWidget{parent} {
   m_xmaxButton = new MineGraphics::XmaxButton(35, 3, 10, m_aspectScale, this);
   auto xmax = m_xmaxButton->getXmax();
   xmax->setCallbacks(fieldResetCallback, nullptr, nullptr);
-  xmax->setPointer(m_field);
+  xmax->setPointer(this);
   m_field->setXmaxButton(m_xmaxButton);
-  fieldResetCallback(0, 0, m_field);
+  m_field->setFlagCounter(m_leftTimer);
+
+  fieldResetCallback(0, 0, this); // Don't forget to update link
+
+  m_time = 0;
+  m_timer = new QTimer(this);
+  connect(m_timer, SIGNAL(timeout()), this, SLOT(timerUpdate()));
+  m_timer->start(1000);
 }
 
 XmaxWindow::~XmaxWindow() {
@@ -54,4 +64,22 @@ XmaxWindow::~XmaxWindow() {
   delete m_rightTimer;
   delete m_xmaxButton;
   delete m_field;
+
+  delete m_timer;
+}
+
+void XmaxWindow::setTime(uint32_t value) {
+  m_time = value;
+  m_rightTimer->setValue(value);
+}
+
+MineGraphics::Field *XmaxWindow::getField() {
+  return m_field;
+}
+
+void XmaxWindow::timerUpdate() {
+  if (m_field->getManager()->getWin() || m_field->getManager()->getLose())
+    return;
+
+  setTime(m_time + 1);
 }

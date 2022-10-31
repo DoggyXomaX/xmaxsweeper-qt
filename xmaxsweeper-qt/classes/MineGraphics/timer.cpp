@@ -76,6 +76,7 @@ void MineGraphics::Timer::setScale(float scale) {
 }
 
 void MineGraphics::Timer::updateDigits() {
+  qDebug() << "m_digitCount: " << m_digitCount;
   uint32_t divider = uint32_t(powf(10, m_digitCount));
   uint32_t digitValue = m_value % divider;
   for (uint32_t i = 0 ; i < m_digitCount; i++) {

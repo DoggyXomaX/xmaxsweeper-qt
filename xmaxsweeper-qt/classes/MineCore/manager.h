@@ -21,8 +21,11 @@ namespace MineCore {
       void accordCell(uint32_t x, uint32_t y);
       void flagCell(uint32_t x, uint32_t y);
       const Cell_u *getField(void);
-      uint32_t getLose(void);
-      uint32_t getWin(void);
+      uint32_t getBombCount(void);
+      uint32_t getFlagCount(void);
+      bool getLose(void);
+      bool getWin(void);
+
 
     private:
       void calculateCell(uint32_t index);
@@ -39,6 +42,7 @@ namespace MineCore {
       uint32_t m_bombCount;
 
       uint32_t m_maskCount;
+      uint32_t m_flagCount;
       bool m_win;
       bool m_lose;
   };

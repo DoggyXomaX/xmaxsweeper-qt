@@ -44,6 +44,9 @@ MineGraphics::Field::Field(uint32_t countX, uint32_t countY, int x, int y, int s
 
   m_borders = new Borders(x, y, size, size, scale, parent);
   m_manager = new MineCore::Manager(m_countX, m_countY);
+  m_xmaxButton = nullptr;
+  m_flagCounter = nullptr;
+
   createField(m_countX, m_countY);
   updateGeometry();
 }
@@ -117,6 +120,10 @@ MineCore::Manager *MineGraphics::Field::getManager() {
 
 void MineGraphics::Field::setXmaxButton(MineGraphics::XmaxButton *xmaxButton) {
   m_xmaxButton = xmaxButton;
+}
+
+void MineGraphics::Field::setFlagCounter(Timer *flagCounter) {
+  m_flagCounter = flagCounter;
 }
 
 MineGraphics::XmaxButton *MineGraphics::Field::getXmaxButton() {
@@ -219,6 +226,11 @@ void MineGraphics::Field::updateField() {
       }
       m_currentField[i].raw = cell.raw;
     }
+  }
+
+  if (m_flagCounter != nullptr) {
+    int diff = m_manager->getBombCount() - m_manager->getFlagCount();
+    m_flagCounter->setValue(diff <= 0 ? 0 : diff);
   }
 
   if (m_manager->getWin())
