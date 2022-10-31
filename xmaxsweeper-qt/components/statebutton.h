@@ -19,6 +19,7 @@ class StateButton : public QLabel {
     void setStatePixmaps(QPixmap *normal, QPixmap *hover, QPixmap *press);
     void setCallbacks(StateButtonCallback *left, StateButtonCallback *middle, StateButtonCallback *right);
     void setPos(uint32_t x, uint32_t y);
+    void setPixmapLock(bool value);
 
   protected:
     void enterEvent(QEnterEvent *e);
@@ -30,6 +31,7 @@ class StateButton : public QLabel {
     uint32_t m_cellX;
     uint32_t m_cellY;
 
+    bool m_pixmapLocked;
     QPixmap *m_normal;
     QPixmap *m_hover;
     QPixmap *m_press;

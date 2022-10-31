@@ -3,6 +3,7 @@
 StateButton::StateButton(QWidget *parent, Qt::WindowFlags f) : QLabel(parent) {
   Q_UNUSED(f);
   this->setAttribute(Qt::WA_Hover, true);
+  m_pixmapLocked = false;
   m_normal = nullptr;
   m_hover = nullptr;
   m_press = nullptr;
@@ -35,15 +36,19 @@ void StateButton::setPos(uint32_t x, uint32_t y) {
   m_cellY = y;
 }
 
+void StateButton::setPixmapLock(bool value) {
+  m_pixmapLocked = value;
+}
+
 void StateButton::enterEvent(QEnterEvent *e) {
   Q_UNUSED(e)
-  if (m_hover)
+  if (m_hover && !m_pixmapLocked)
     this->setPixmap(*m_hover);
 }
 
 void StateButton::leaveEvent(QEvent *e) {
   Q_UNUSED(e)
-  if (m_normal)
+  if (m_normal && !m_pixmapLocked)
     this->setPixmap(*m_normal);
 }
 
@@ -56,11 +61,11 @@ void StateButton::mousePressEvent(QMouseEvent *e) {
   else if (button == Qt::RightButton && m_rightButtonClick)
     m_rightButtonClick(m_cellX, m_cellY);
 
-  if (button == Qt::LeftButton && m_press)
+  if (button == Qt::LeftButton && m_press && !m_pixmapLocked)
     this->setPixmap(*m_press);
 }
 
 void StateButton::mouseReleaseEvent(QMouseEvent *e) {
-  if (e->button() == Qt::LeftButton && m_normal)
+  if (e->button() == Qt::LeftButton && m_normal && !m_pixmapLocked)
     this->setPixmap(*m_normal);
 }

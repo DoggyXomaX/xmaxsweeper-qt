@@ -47,7 +47,7 @@ namespace MineGraphics {
 
       Borders *m_borders;
       StateButton *m_button;
-      QLabel *m_xmax;
+      StateButton *m_xmax;
       int m_x, m_y, m_size;
       float m_scale;
   };
