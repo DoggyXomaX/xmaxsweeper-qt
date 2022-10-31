@@ -115,6 +115,14 @@ MineCore::Manager *MineGraphics::Field::getManager() {
   return m_manager;
 }
 
+void MineGraphics::Field::setXmaxButton(MineGraphics::XmaxButton *xmaxButton) {
+  m_xmaxButton = xmaxButton;
+}
+
+MineGraphics::XmaxButton *MineGraphics::Field::getXmaxButton() {
+  return m_xmaxButton;
+}
+
 void MineGraphics::Field::updateGeometry() {
   m_borders->setBorders(m_x, m_y, m_size * m_countX, m_size * m_countY, m_scale);
   for (uint32_t y = 0, i = 0; y < m_countY; y++) {
@@ -190,8 +198,7 @@ void MineGraphics::Field::destroyField() {
 }
 
 void MineGraphics::Field::updateField() {
-  const MineCore::Cell_u *managerField = m_manager->getField();
-
+  auto managerField = m_manager->getField();
   for (uint32_t y = 0, i = 0; y < m_countY; y++)
   for (uint32_t x = 0; x < m_countX; x++, i++) {
     if (m_currentField[i].raw != managerField[i].raw) {
@@ -213,4 +220,9 @@ void MineGraphics::Field::updateField() {
       m_currentField[i].raw = cell.raw;
     }
   }
+
+  if (m_manager->getWin())
+    m_xmaxButton->setXmaxState(XmaxType::Win);
+  if (m_manager->getLose())
+    m_xmaxButton->setXmaxState(XmaxType::Lose);
 }

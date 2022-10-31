@@ -21,6 +21,8 @@ namespace MineCore {
       void accordCell(uint32_t x, uint32_t y);
       void flagCell(uint32_t x, uint32_t y);
       const Cell_u *getField(void);
+      uint32_t getLose(void);
+      uint32_t getWin(void);
 
     private:
       void calculateCell(uint32_t index);
@@ -29,15 +31,16 @@ namespace MineCore {
       void fillMask(CellMaskType maskType);
       void initField(void);
       void openRecursive(int x, int y);
-
-      // Test
-      void test(void);
       void print(void);
 
       Cell_u *m_field;
       uint32_t m_width;
       uint32_t m_height;
       uint32_t m_bombCount;
+
+      uint32_t m_maskCount;
+      bool m_win;
+      bool m_lose;
   };
 }
 

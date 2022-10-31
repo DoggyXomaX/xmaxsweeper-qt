@@ -6,8 +6,11 @@ void fieldResetCallback(uint32_t x, uint32_t y, void *p) {
   qDebug() << "Reset";
 
   auto fp = (MineGraphics::Field*)p;
+  auto xmaxButton = fp->getXmaxButton();
+  xmaxButton->setXmaxState(MineGraphics::XmaxType::Idle);
+
   auto manager = fp->getManager();
-  manager->generateBombs(16);
+  manager->generateBombs(8);
   fp->updateField();
 }
 
@@ -28,9 +31,11 @@ XmaxWindow::XmaxWindow(QWidget *parent) : QWidget{parent} {
   m_field = new MineGraphics::Field(8, 8, 20, 19, 5, m_aspectScale, this);
 
   m_xmaxButton = new MineGraphics::XmaxButton(35, 3, 10, m_aspectScale, this);
-  auto xmaxButton = m_xmaxButton->getXmax();
-  xmaxButton->setCallbacks(fieldResetCallback, nullptr, nullptr);
-  xmaxButton->setPointer(m_field);
+  auto xmax = m_xmaxButton->getXmax();
+  xmax->setCallbacks(fieldResetCallback, nullptr, nullptr);
+  xmax->setPointer(m_field);
+  m_field->setXmaxButton(m_xmaxButton);
+  fieldResetCallback(0, 0, m_field);
 }
 
 XmaxWindow::~XmaxWindow() {

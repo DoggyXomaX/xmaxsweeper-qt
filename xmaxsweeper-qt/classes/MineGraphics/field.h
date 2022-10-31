@@ -9,6 +9,7 @@
 
 #include "borders.h"
 #include "components/statebutton.h"
+#include "classes/MineGraphics/xmaxbutton.h"
 #include "classes/MineCore/cell.h"
 #include "classes/MineCore/manager.h"
 
@@ -49,6 +50,8 @@ namespace MineGraphics {
       void setScale(float scale);
       void setCounts(uint32_t countX, uint32_t countY);
       void setCell(FieldCellTypes index, uint32_t x, uint32_t y);
+      void setXmaxButton(XmaxButton *xmaxButton);
+      XmaxButton *getXmaxButton(void);
       MineCore::Manager *getManager(void);
       void updateField(void);
 
@@ -58,6 +61,7 @@ namespace MineGraphics {
       void destroyField(void);
 
       QWidget *m_parent;
+      XmaxButton *m_xmaxButton;
       Borders *m_borders;
       StateButton **m_field;
       uint32_t m_countX, m_countY;
