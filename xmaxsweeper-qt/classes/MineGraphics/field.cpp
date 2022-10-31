@@ -150,6 +150,18 @@ void MineGraphics::Field::updateGeometry() {
   }
 }
 
+void cellOpenCallback(uint32_t x, uint32_t y) {
+  qDebug() << "Open: " << x << ", " << y;
+}
+
+void cellAccordCallback(uint32_t x, uint32_t y) {
+  qDebug() << "Accord: " << x << ", " << y;
+}
+
+void cellFlagCallback(uint32_t x, uint32_t y) {
+  qDebug() << "Flag: " << x << ", " << y;
+}
+
 void MineGraphics::Field::createField(uint32_t countX, uint32_t countY) {
   m_countX = countX;
   m_countY = countY;
@@ -157,7 +169,8 @@ void MineGraphics::Field::createField(uint32_t countX, uint32_t countY) {
   const uint32_t length = m_countX * m_countY;
   m_field = new StateButton*[length];
   m_fieldIndexes = new FieldCellTypes[length];
-  for (uint32_t i = 0; i < length; i++) {
+  for (uint32_t y = 0, i = 0; y < m_countY; y++)
+  for (uint32_t x = 0; x < m_countX; x++, i++) {
     m_field[i] = new StateButton;
     m_field[i]->setParent(m_parent);
     m_field[i]->setScaledContents(true);
@@ -165,6 +178,8 @@ void MineGraphics::Field::createField(uint32_t countX, uint32_t countY) {
       &CellPixmaps[(uint32_t)FieldCellTypes::Masked],
       &CellPixmaps[(uint32_t)FieldCellTypes::MaskedHover],
       &CellPixmaps[(uint32_t)FieldCellTypes::MaskedPressed]);
+    m_field[i]->setPos(x, y);
+    m_field[i]->setCallbacks(&cellOpenCallback, &cellAccordCallback, &cellFlagCallback);
     m_field[i]->show();
 
     m_fieldIndexes[i] = FieldCellTypes::Masked;

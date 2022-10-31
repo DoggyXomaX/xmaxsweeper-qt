@@ -33,6 +33,8 @@ void MineCore::Manager::generateBombs(uint32_t bombCount) {
     indexes.erase(indexes.begin() + r);
     m_field[index].s.value = CellValueType::Bomb;
   }
+
+  calculateBombs();
 }
 
 // unsafe index
@@ -103,7 +105,7 @@ void MineCore::Manager::print() {
     for (uint32_t x = 0; x < m_width; x++, i++) {
       if (x)
         outputInfo += "\t";
-      outputInfo += QString::asprintf("%u|%u", m_field[i].s.mask, m_field[i].s.value);
+      outputInfo += QString::asprintf("%u|%u", uint32_t(m_field[i].s.mask), uint32_t(m_field[i].s.value));
     }
   }
 

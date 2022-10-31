@@ -55,6 +55,7 @@ namespace MineGraphics {
       void updateGeometry(void);
       void createField(uint32_t countX, uint32_t countY);
       void destroyField(void);
+      void updateField(void);
 
       QWidget *m_parent;
       Borders *m_borders;
