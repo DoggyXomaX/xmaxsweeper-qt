@@ -28,6 +28,7 @@ namespace MineCore {
       void fillValue(CellValueType valueType);
       void fillMask(CellMaskType maskType);
       void initField(void);
+      void openRecursive(int x, int y);
 
       // Test
       void test(void);

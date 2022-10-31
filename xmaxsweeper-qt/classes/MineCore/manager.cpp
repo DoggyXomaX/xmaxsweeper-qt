@@ -37,15 +37,50 @@ void MineCore::Manager::generateBombs(uint32_t bombCount) {
   calculateBombs();
 }
 
+void MineCore::Manager::openRecursive(int x, int y) {
+  if (x < 0 || x >= int(m_width) || y < 0 || y >= int(m_height))
+    return;
+
+  uint32_t i = uint32_t(y) * m_width + uint32_t(x);
+  m_field[i].s.mask = CellMaskType::Open;
+
+  if (m_field[i].s.value == CellValueType::Value0) {
+    for (int dy = -1; dy <= 1; dy++)
+    for (int dx = -1; dx <= 1; dx++) {
+      if (!dx && !dy)
+        continue;
+
+      int tx = x + dx;
+      if (tx < 0 || tx >= int(m_width))
+        continue;
+      int ty = y + dy;
+      if (ty < 0 || ty >= int(m_height))
+        continue;
+      int ti = ty * int(m_width) + tx;
+
+      if (m_field[ti].s.mask == CellMaskType::Masked || m_field[ti].s.mask == CellMaskType::Question)
+        openCell(uint32_t(tx), uint32_t(ty));
+    }
+  }
+}
+
 void MineCore::Manager::openCell(uint32_t x, uint32_t y) {
   if (x >= m_width || y >= m_height)
     return;
 
   uint32_t i = y * m_width + x;
-  if (m_field[i].s.mask == CellMaskType::Open)
+  if (m_field[i].s.mask == CellMaskType::Open || m_field[i].s.mask == CellMaskType::Flagged)
     return;
 
-  m_field[i].s.mask = CellMaskType::Open;
+  if (m_field[i].s.value == CellValueType::Bomb) {
+    uint32_t length = m_width * m_height;
+    for (uint32_t i = 0; i < length; i++)
+      if (m_field[i].s.value == CellValueType::Bomb)
+        m_field[i].s.mask = CellMaskType::Open;
+    return;
+  }
+
+  openRecursive(int(x), int(y));
 }
 
 void MineCore::Manager::accordCell(uint32_t x, uint32_t y) {
