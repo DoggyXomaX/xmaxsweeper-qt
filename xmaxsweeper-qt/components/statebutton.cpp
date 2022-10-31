@@ -6,6 +6,13 @@ StateButton::StateButton(QWidget *parent, Qt::WindowFlags f) : QLabel(parent) {
   m_normal = nullptr;
   m_hover = nullptr;
   m_press = nullptr;
+
+  m_leftButtonClick = nullptr;
+  m_middleButtonClick = nullptr;
+  m_rightButtonClick = nullptr;
+
+  m_cellX = 0;
+  m_cellY = 0;
 }
 
 StateButton::~StateButton() {}
@@ -17,34 +24,43 @@ void StateButton::setStatePixmaps(QPixmap *normal, QPixmap *hover, QPixmap *pres
   this->leaveEvent(nullptr);
 }
 
+void StateButton::setCallbacks(StateButtonCallback *left, StateButtonCallback *middle, StateButtonCallback *right) {
+  m_leftButtonClick = left;
+  m_middleButtonClick = middle;
+  m_rightButtonClick = right;
+}
+
+void StateButton::setPos(uint32_t x, uint32_t y) {
+  m_cellX = x;
+  m_cellY = y;
+}
+
 void StateButton::enterEvent(QEnterEvent *e) {
-  Q_UNUSED(e);
-  if (m_hover == nullptr)
-    return;
-  this->setPixmap(*m_hover);
+  Q_UNUSED(e)
+  if (m_hover)
+    this->setPixmap(*m_hover);
 }
 
 void StateButton::leaveEvent(QEvent *e) {
-  Q_UNUSED(e);
-  if (m_normal == nullptr)
-    return;
-  this->setPixmap(*m_normal);
+  Q_UNUSED(e)
+  if (m_normal)
+    this->setPixmap(*m_normal);
 }
 
 void StateButton::mousePressEvent(QMouseEvent *e) {
-  Q_UNUSED(e);
-  if (e->button() != Qt::LeftButton)
-    return;
-  if (m_press == nullptr)
-    return;
-  this->setPixmap(*m_press);
+  auto button = e->button();
+  if (button == Qt::LeftButton && m_leftButtonClick)
+    m_leftButtonClick(m_cellX, m_cellY);
+  else if (button == Qt::MiddleButton && m_middleButtonClick)
+    m_middleButtonClick(m_cellX, m_cellY);
+  else if (button == Qt::RightButton && m_rightButtonClick)
+    m_rightButtonClick(m_cellX, m_cellY);
+
+  if (button == Qt::LeftButton && m_press)
+    this->setPixmap(*m_press);
 }
 
 void StateButton::mouseReleaseEvent(QMouseEvent *e) {
-  Q_UNUSED(e);
-  if (e->button() != Qt::LeftButton)
-    return;
-  if (m_normal == nullptr)
-    return;
-  this->setPixmap(*m_normal);
+  if (e->button() == Qt::LeftButton && m_normal)
+    this->setPixmap(*m_normal);
 }
