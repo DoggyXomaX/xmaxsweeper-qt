@@ -9,7 +9,7 @@
 #include <QEnterEvent>
 #include <QPixmap>
 
-typedef void StateButtonCallback(uint32_t, uint32_t);
+typedef void StateButtonCallback(uint32_t, uint32_t, void*);
 
 class StateButton : public QLabel {
   Q_OBJECT
@@ -19,6 +19,7 @@ class StateButton : public QLabel {
     void setStatePixmaps(QPixmap *normal, QPixmap *hover, QPixmap *press);
     void setCallbacks(StateButtonCallback *left, StateButtonCallback *middle, StateButtonCallback *right);
     void setPos(uint32_t x, uint32_t y);
+    void setPointer(void *pointer);
     void setPixmapLock(bool value);
 
   protected:
@@ -30,6 +31,7 @@ class StateButton : public QLabel {
   private:
     uint32_t m_cellX;
     uint32_t m_cellY;
+    void *m_pointer;
 
     bool m_pixmapLocked;
     QPixmap *m_normal;

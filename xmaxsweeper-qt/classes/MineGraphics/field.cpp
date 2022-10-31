@@ -43,16 +43,9 @@ MineGraphics::Field::Field(uint32_t countX, uint32_t countY, int x, int y, int s
   }
 
   m_borders = new Borders(x, y, size, size, scale, parent);
-  createField(countX, countY);
-  updateGeometry();
-
-  // Uncomment to test randomize
-  srand(time(nullptr));
-  for (uint32_t y = 0; y < 8; y++)
-    for (uint32_t x = 0; x < 8; x++)
-      setCell(FieldCellTypes(rand() % CellPixmapPathsLength), x, y);
-
   m_manager = new MineCore::Manager(m_countX, m_countY);
+  createField(m_countX, m_countY);
+  updateGeometry();
 }
 
 MineGraphics::Field::~Field() {
@@ -89,8 +82,6 @@ void MineGraphics::Field::setCell(FieldCellTypes index, uint32_t x, uint32_t y) 
     return;
 
   uint32_t i = y * m_countX + x;
-  m_fieldIndexes[i] = index;
-
   switch (index) {
     case FieldCellTypes::Masked:
     case FieldCellTypes::MaskedHover:
@@ -120,21 +111,8 @@ void MineGraphics::Field::setCell(FieldCellTypes index, uint32_t x, uint32_t y) 
   }
 }
 
-void MineGraphics::Field::setCell(MineCore::Cell_u cell, uint32_t x, uint32_t y) {
-  switch (cell.s.mask) {
-    case MineCore::CellMaskType::Masked:
-      setCell(FieldCellTypes::Masked, x, y);
-      break;
-    case MineCore::CellMaskType::Flagged:
-      setCell(FieldCellTypes::Flagged, x, y);
-      break;
-    case MineCore::CellMaskType::Question:
-      setCell(FieldCellTypes::Question, x, y);
-      break;
-    default:
-      setCell(FieldCellTypes((uint32_t)FieldCellTypes::Value0 + (uint32_t)cell.s.value), x, y);
-      break;
-  }
+MineCore::Manager *MineGraphics::Field::getManager() {
+  return m_manager;
 }
 
 void MineGraphics::Field::updateGeometry() {
@@ -150,16 +128,31 @@ void MineGraphics::Field::updateGeometry() {
   }
 }
 
-void cellOpenCallback(uint32_t x, uint32_t y) {
+void cellOpenCallback(uint32_t x, uint32_t y, void *p) {
   qDebug() << "Open: " << x << ", " << y;
+
+  auto fp = (MineGraphics::Field*)p;
+  auto manager = fp->getManager();
+  manager->openCell(x, y);
+  fp->updateField();
 }
 
-void cellAccordCallback(uint32_t x, uint32_t y) {
+void cellAccordCallback(uint32_t x, uint32_t y, void *p) {
   qDebug() << "Accord: " << x << ", " << y;
+
+  auto fp = (MineGraphics::Field*)p;
+  auto manager = fp->getManager();
+  manager->accordCell(x, y);
+  fp->updateField();
 }
 
-void cellFlagCallback(uint32_t x, uint32_t y) {
+void cellFlagCallback(uint32_t x, uint32_t y, void *p) {
   qDebug() << "Flag: " << x << ", " << y;
+
+  auto fp = (MineGraphics::Field*)p;
+  auto manager = fp->getManager();
+  manager->flagCell(x, y);
+  fp->updateField();
 }
 
 void MineGraphics::Field::createField(uint32_t countX, uint32_t countY) {
@@ -168,7 +161,7 @@ void MineGraphics::Field::createField(uint32_t countX, uint32_t countY) {
 
   const uint32_t length = m_countX * m_countY;
   m_field = new StateButton*[length];
-  m_fieldIndexes = new FieldCellTypes[length];
+  m_currentField = new MineCore::Cell_u[length];
   for (uint32_t y = 0, i = 0; y < m_countY; y++)
   for (uint32_t x = 0; x < m_countX; x++, i++) {
     m_field[i] = new StateButton;
@@ -179,16 +172,45 @@ void MineGraphics::Field::createField(uint32_t countX, uint32_t countY) {
       &CellPixmaps[(uint32_t)FieldCellTypes::MaskedHover],
       &CellPixmaps[(uint32_t)FieldCellTypes::MaskedPressed]);
     m_field[i]->setPos(x, y);
+    m_field[i]->setPointer(this);
     m_field[i]->setCallbacks(&cellOpenCallback, &cellAccordCallback, &cellFlagCallback);
     m_field[i]->show();
 
-    m_fieldIndexes[i] = FieldCellTypes::Masked;
+    m_currentField[i].s.mask = MineCore::CellMaskType::Masked;
+    m_currentField[i].s.value = MineCore::CellValueType::Value0;
   }
 }
 
 void MineGraphics::Field::destroyField() {
-  for (uint32_t i = 0; i < m_countX * m_countY; i++)
+  uint32_t length = m_countX * m_countY;
+  for (uint32_t i = 0; i < length; i++)
     delete m_field[i];
   delete [] m_field;
-  delete [] m_fieldIndexes;
+  delete [] m_currentField;
+}
+
+void MineGraphics::Field::updateField() {
+  const MineCore::Cell_u *managerField = m_manager->getField();
+
+  for (uint32_t y = 0, i = 0; y < m_countY; y++)
+  for (uint32_t x = 0; x < m_countX; x++, i++) {
+    if (m_currentField[i].raw != managerField[i].raw) {
+      auto cell = managerField[i];
+      switch (cell.s.mask) {
+        case MineCore::CellMaskType::Masked:
+          setCell(FieldCellTypes::Masked, x, y);
+          break;
+        case MineCore::CellMaskType::Flagged:
+          setCell(FieldCellTypes::Flagged, x, y);
+          break;
+        case MineCore::CellMaskType::Question:
+          setCell(FieldCellTypes::Question, x, y);
+          break;
+        default:
+          setCell(FieldCellTypes((uint32_t)FieldCellTypes::Value0 + (uint32_t)cell.s.value), x, y);
+          break;
+      }
+      m_currentField[i].raw = cell.raw;
+    }
+  }
 }

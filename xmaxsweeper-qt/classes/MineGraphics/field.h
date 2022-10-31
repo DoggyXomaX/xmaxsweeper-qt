@@ -49,13 +49,13 @@ namespace MineGraphics {
       void setScale(float scale);
       void setCounts(uint32_t countX, uint32_t countY);
       void setCell(FieldCellTypes index, uint32_t x, uint32_t y);
-      void setCell(MineCore::Cell_u cell, uint32_t x, uint32_t y);
+      MineCore::Manager *getManager(void);
+      void updateField(void);
 
     private:
       void updateGeometry(void);
       void createField(uint32_t countX, uint32_t countY);
       void destroyField(void);
-      void updateField(void);
 
       QWidget *m_parent;
       Borders *m_borders;
@@ -63,7 +63,7 @@ namespace MineGraphics {
       uint32_t m_countX, m_countY;
 
       MineCore::Manager *m_manager;
-      FieldCellTypes *m_fieldIndexes;
+      MineCore::Cell_u *m_currentField;
 
       int m_x, m_y;
       int m_size;

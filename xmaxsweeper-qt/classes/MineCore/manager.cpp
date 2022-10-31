@@ -37,6 +37,57 @@ void MineCore::Manager::generateBombs(uint32_t bombCount) {
   calculateBombs();
 }
 
+void MineCore::Manager::openCell(uint32_t x, uint32_t y) {
+  if (x >= m_width || y >= m_height)
+    return;
+
+  uint32_t i = y * m_width + x;
+  if (m_field[i].s.mask == CellMaskType::Open)
+    return;
+
+  m_field[i].s.mask = CellMaskType::Open;
+}
+
+void MineCore::Manager::accordCell(uint32_t x, uint32_t y) {
+  if (x >= m_width || y >= m_height)
+    return;
+
+  flagCell(x, y);
+
+  uint32_t i = y * m_width + x;
+  if (m_field[i].s.mask != CellMaskType::Open)
+    return;
+
+
+}
+
+void MineCore::Manager::flagCell(uint32_t x, uint32_t y) {
+  if (x >= m_width || y >= m_height)
+    return;
+
+  uint32_t i = y * m_width + x;
+  if (m_field[i].s.mask == CellMaskType::Open)
+    return;
+
+  switch (m_field[i].s.mask) {
+    case CellMaskType::Masked:
+      m_field[i].s.mask = CellMaskType::Flagged;
+      break;
+    case CellMaskType::Flagged:
+      m_field[i].s.mask = CellMaskType::Question;
+      break;
+    case CellMaskType::Question:
+      m_field[i].s.mask = CellMaskType::Masked;
+      break;
+    default:
+      break;
+  }
+}
+
+const MineCore::Cell_u *MineCore::Manager::getField() {
+  return (const Cell_u*)m_field;
+}
+
 // unsafe index
 void MineCore::Manager::calculateCell(uint32_t index) {
   if (m_field[index].s.value == CellValueType::Bomb)

@@ -38,6 +38,8 @@ namespace MineGraphics {
       void setScale(float scale);
       void setButtonState(XmaxButtonType buttonState);
       void setXmaxState(XmaxType xmaxState);
+      StateButton *getButton(void);
+      StateButton *getXmax(void);
 
     private:
       void updateGeometry(void);

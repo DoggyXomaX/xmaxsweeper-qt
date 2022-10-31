@@ -17,6 +17,10 @@ namespace MineCore {
       Manager(uint32_t width, uint32_t height);
       ~Manager();
       void generateBombs(uint32_t bombCount);
+      void openCell(uint32_t x, uint32_t y);
+      void accordCell(uint32_t x, uint32_t y);
+      void flagCell(uint32_t x, uint32_t y);
+      const Cell_u *getField(void);
 
     private:
       void calculateCell(uint32_t index);

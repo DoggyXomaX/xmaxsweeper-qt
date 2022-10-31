@@ -89,6 +89,14 @@ void MineGraphics::XmaxButton::setXmaxState(XmaxType xmaxState) {
   m_xmax->setPixmap(XmaxPixmaps[(int)xmaxState]);
 }
 
+StateButton *MineGraphics::XmaxButton::getButton() {
+  return m_button;
+}
+
+StateButton *MineGraphics::XmaxButton::getXmax() {
+  return m_xmax;
+}
+
 void MineGraphics::XmaxButton::updateGeometry(void) {
   m_borders->setBorders(m_x, m_y, m_size, m_size, m_scale);
   m_button->setGeometry(

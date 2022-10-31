@@ -14,6 +14,7 @@ StateButton::StateButton(QWidget *parent, Qt::WindowFlags f) : QLabel(parent) {
 
   m_cellX = 0;
   m_cellY = 0;
+  m_pointer = nullptr;
 }
 
 StateButton::~StateButton() {}
@@ -36,6 +37,10 @@ void StateButton::setPos(uint32_t x, uint32_t y) {
   m_cellY = y;
 }
 
+void StateButton::setPointer(void *pointer) {
+  m_pointer = pointer;
+}
+
 void StateButton::setPixmapLock(bool value) {
   m_pixmapLocked = value;
 }
@@ -55,11 +60,11 @@ void StateButton::leaveEvent(QEvent *e) {
 void StateButton::mousePressEvent(QMouseEvent *e) {
   auto button = e->button();
   if (button == Qt::LeftButton && m_leftButtonClick)
-    m_leftButtonClick(m_cellX, m_cellY);
+    m_leftButtonClick(m_cellX, m_cellY, m_pointer);
   else if (button == Qt::MiddleButton && m_middleButtonClick)
-    m_middleButtonClick(m_cellX, m_cellY);
+    m_middleButtonClick(m_cellX, m_cellY, m_pointer);
   else if (button == Qt::RightButton && m_rightButtonClick)
-    m_rightButtonClick(m_cellX, m_cellY);
+    m_rightButtonClick(m_cellX, m_cellY, m_pointer);
 
   if (button == Qt::LeftButton && m_press && !m_pixmapLocked)
     this->setPixmap(*m_press);
