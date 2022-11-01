@@ -4,14 +4,14 @@
 #include <cinttypes>
 
 namespace MineCore {
-  enum class CellMaskType : uint32_t {
+  enum class CellMaskType : uint8_t {
     Open = 0,
     Masked,
     Flagged,
     Question,
   };
 
-  enum class CellValueType : uint32_t {
+  enum class CellValueType : uint8_t {
     Value0 = 0,
     Value1,
     Value2,
@@ -31,7 +31,7 @@ namespace MineCore {
 
   union Cell_u {
     Cell_t s;
-    unsigned char raw;
+    uint8_t raw;
   };
 }
 
