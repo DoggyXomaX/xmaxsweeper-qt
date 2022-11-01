@@ -45,7 +45,7 @@ XmaxWindow::XmaxWindow(QWidget *parent) : QWidget{parent} {
   m_time = 0;
   m_timer = new QTimer(this);
   connect(m_timer, SIGNAL(timeout()), this, SLOT(timerUpdate()));
-  m_timer->start(10);
+  m_timer->start(1000);
 }
 
 XmaxWindow::~XmaxWindow() {
