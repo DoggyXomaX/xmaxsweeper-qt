@@ -148,6 +148,8 @@ void cellOpenCallback(uint32_t x, uint32_t y, void *p) {
 
   auto fp = (MineGraphics::Field*)p;
   auto manager = fp->getManager();
+  if (manager->getWin() || manager->getLose())
+    return;
   manager->openCell(x, y);
   fp->updateField();
 }
@@ -157,6 +159,8 @@ void cellAccordCallback(uint32_t x, uint32_t y, void *p) {
 
   auto fp = (MineGraphics::Field*)p;
   auto manager = fp->getManager();
+  if (manager->getWin() || manager->getLose())
+    return;
   manager->accordCell(x, y);
   fp->updateField();
 }
@@ -166,6 +170,8 @@ void cellFlagCallback(uint32_t x, uint32_t y, void *p) {
 
   auto fp = (MineGraphics::Field*)p;
   auto manager = fp->getManager();
+  if (manager->getWin() || manager->getLose())
+    return;
   manager->flagCell(x, y);
   fp->updateField();
 }

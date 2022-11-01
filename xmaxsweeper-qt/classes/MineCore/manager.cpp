@@ -109,13 +109,11 @@ void MineCore::Manager::accordCell(uint32_t x, uint32_t y) {
   if (x >= m_width || y >= m_height)
     return;
 
-  flagCell(x, y);
-
   uint32_t i = y * m_width + x;
   if (m_field[i].s.mask != CellMaskType::Open || m_field[i].s.value == CellValueType::Bomb)
     return;
 
-  // flagAccord
+  // flagAccord ?
 
   uint32_t flagCount = 0;
   for (int dy = -1; dy <= 1; dy++)
